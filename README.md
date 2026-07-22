@@ -1,66 +1,68 @@
 # AI Agente Inmobiliario
 
-Este proyecto es mi intento de convertir una busqueda inmobiliaria normal en
-algo mucho mas comodo, visual y con datos.
+Este proyecto nace de una idea muy simple: estaba mirando casas por Campoamor y
+me di cuenta de que buscar bien una vivienda es mucho más pesado de lo que
+parece.
 
-La idea empezo con una pregunta bastante simple: si estoy mirando casas en
-Campoamor, por que tengo que ir web por web, abrir anuncios repetidos, comparar
-precios a ojo y perder viviendas interesantes entre tantas pestanas?
+Tienes que entrar en varias webs, repetir búsquedas, abrir anuncios que a veces
+ya habías visto, comparar precios a ojo, guardar enlaces, mirar fotos, revisar
+si realmente está cerca de la zona que quieres... y al final es fácil perderse
+o dejar pasar algo interesante.
 
-Asi que empece a construir un agente que busca anuncios, guarda la informacion
-importante, estima si el precio tiene sentido y genera un portal propio para
-revisarlo todo con calma.
+Así que pensé: ¿y si hago un agente que me ayude con todo eso?
+
+La idea es que el programa busque anuncios por mí, junte la información
+importante, compare precios con un modelo de machine learning y me genere un
+portal propio para ver las viviendas de una forma mucho más clara.
 
 ## Ver el portal
 
-Cuando GitHub Pages este activado, el portal se podra ver aqui:
+Cuando GitHub Pages esté activado, el portal se podrá ver aquí:
 
 [Ver portal inmobiliario](https://alexgonzalezromo.github.io/IA_Agente_Inmobiliario/portal/)
 
-El portal incluye anuncios con foto, filtros, ordenacion, fichas individuales,
-galeria de imagenes y enlace directo a la web original de cada vivienda.
+Ahí se ven los anuncios con fotos, filtros, ordenación, fichas individuales,
+galería de imágenes y un botón para ir directamente al anuncio original.
 
-## Que hace
+## Qué hace
 
-- Reune anuncios de varias webs inmobiliarias.
-- Se centra en viviendas de Campoamor y alrededores.
-- Guarda precio, metros, habitaciones, banos, ubicacion, fotos y enlace original.
-- Calcula datos utiles como precio por metro cuadrado.
-- Usa machine learning para estimar el valor aproximado de cada vivienda.
-- Compara el precio anunciado con esa estimacion.
-- Genera una web estatica para ver las mejores oportunidades de forma clara.
+El agente recopila viviendas de distintas webs inmobiliarias y se queda con los
+datos que de verdad me interesan: precio, metros, habitaciones, baños, ubicación,
+fotos, enlace original y algunos detalles del anuncio.
 
-## Por que me gusta este proyecto
+Después usa un modelo de machine learning para estimar si el precio parece estar
+por encima, cerca o por debajo de lo esperable. No lo planteo como una tasación
+profesional, sino como una ayuda rápida para ordenar mejor los anuncios y
+detectar oportunidades que merecen una segunda mirada.
 
-Porque mezcla varias cosas que me interesan mucho: automatizacion, datos,
-machine learning y una interfaz que realmente sirve para tomar decisiones.
+Lo que más me gusta es que no se queda en un script que imprime cosas por
+pantalla. El resultado acaba siendo una web estática, visual y fácil de revisar,
+casi como un mini portal inmobiliario hecho a mi medida.
 
-No queria hacer solo un script que escupe resultados por consola. Queria llegar
-a algo que se pudiera abrir, mirar y entender rapido, casi como si fuera mi
-propio mini portal inmobiliario.
+## Por qué me hacía ilusión hacerlo
 
-## Fuentes que estoy trabajando
+Porque junta varias cosas que me gustan mucho: automatización, scraping, datos,
+machine learning y una interfaz que realmente se puede usar.
 
-Ahora mismo el proyecto trabaja con varias fuentes, entre ellas Fotocasa,
-Idealista, Milanuncios, Moreno Schmidt y United Real Estate.
+También me gusta porque no es un proyecto inventado sin contexto. Sale de una
+necesidad bastante real: querer buscar mejor, ahorrar tiempo y tener una forma
+más inteligente de comparar viviendas.
 
-Cada web es un mundo y algunas cambian bastante o ponen limites, asi que parte
-del proyecto tambien consiste en ir haciendo los scrapers mas resistentes y
-anadir nuevas fuentes poco a poco.
+## Fuentes
 
-## Machine learning
+Ahora mismo estoy trabajando con anuncios de Fotocasa, Idealista, Milanuncios,
+Moreno Schmidt y United Real Estate.
 
-La parte de ML intenta estimar el precio de una vivienda usando datos como
-metros, habitaciones, banos, zona, tipo de vivienda, distancia a la playa y
-extras que aparecen en el texto del anuncio.
+Cada web funciona de una manera distinta y algunas cambian bastante, así que una
+parte importante del proyecto es ir haciendo los scrapers más sólidos y añadir
+nuevas fuentes poco a poco.
 
-No es una tasacion profesional, pero si sirve como una referencia rapida para
-detectar anuncios que parecen caros, ajustados o potencialmente interesantes.
+## Lo siguiente
 
-## Siguientes pasos
+Me gustaría seguir mejorando el scoring, añadir más fuentes, cuidar todavía más
+la parte visual del portal y acabar desplegándolo para que se actualice solo
+desde un servidor.
 
-Quiero seguir mejorandolo con mas fuentes, mejores fotos, scoring mas fino y una
-version desplegada para que el portal se pueda consultar siempre online.
-
-La idea final es que el agente pueda ejecutarse en un servidor, actualizar los
-anuncios automaticamente y dejar el portal listo sin tener que hacerlo a mano.
+La idea final sería tener un agente funcionando en segundo plano, buscando
+viviendas nuevas y dejando el portal listo para abrirlo y revisar las mejores
+opciones sin tener que empezar desde cero cada vez.
