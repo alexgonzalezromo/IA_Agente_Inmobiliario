@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Piso en venta en Calle Rambla del Nacimiento, 4, Campoamor</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #667085;
+      --line: #d7dfdc;
+      --accent: #0f766e;
+      --accent-dark: #0a4f49;
+      --good: #137a3f;
+      --bad: #a33b2f;
+      --panel: #fff;
+      --soft: #eef3f1;
+      --warm: #fbf6ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f7f6;
+    }
+    a, button { font: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 18px 20px 54px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back, .external {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 10px 13px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+    .back { background: #18212d; }
+    .external:hover { background: var(--accent-dark); }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+    .gallery, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17, 24, 39, .09);
+    }
+    .stage {
+      position: relative;
+      background: #dbe4e2;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .stage img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+    .counter {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+    }
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 10px;
+      max-height: 230px;
+      overflow: auto;
+    }
+    .thumb {
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      aspect-ratio: 4 / 3;
+    }
+    .thumb.active { border-color: var(--accent); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .panel { padding: 20px; }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 30px; line-height: 1.12; margin: 0 0 10px; letter-spacing: 0; }
+    .location { margin: 0 0 16px; color: var(--muted); }
+    .price { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .delta { font-weight: 900; margin-bottom: 16px; }
+    .delta.below { color: var(--good); }
+    .delta.above { color: var(--bad); }
+    .delta.near { color: var(--accent); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .metrics div {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .metrics strong { display: block; }
+    .metrics span { color: var(--muted); font-size: 13px; }
+    .summary, .description {
+      color: #344054;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .analysis section {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .analysis h2 { font-size: 15px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #344054;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .stage, .stage img { height: 430px; min-height: 430px; }
+    }
+    @media (max-width: 560px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+      .stage, .stage img { height: 300px; min-height: 300px; }
+      .analysis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <a class="back" href="../index.html">Volver al ranking</a>
+      <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/parking-zona-comunitaria-ascensor-amueblado-piscina/188928739/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+    </div>
+    <div class="layout">
+      <section class="gallery">
+        <div class="stage">
+          <button class="nav prev" type="button" aria-label="Foto anterior">&#8249;</button>
+          <img id="main-photo" src="https://static.fotocasa.es/images/ads/e4e822bc-ed62-4f6a-a4a5-9c0b0f7bc269?rule=original" alt="Piso en venta en Calle Rambla del Nacimiento, 4, Campoamor">
+          <button class="nav next" type="button" aria-label="Foto siguiente">&#8250;</button>
+          <div class="counter" id="counter">1/23</div>
+        </div>
+        <div class="thumbs"><button type="button" class="thumb active" data-index="0"><img src="https://static.fotocasa.es/images/ads/e4e822bc-ed62-4f6a-a4a5-9c0b0f7bc269?rule=original" alt="Foto 1"></button><button type="button" class="thumb" data-index="1"><img src="https://static.fotocasa.es/images/ads/bcb1b4d3-b600-4e22-9bdf-adcb5acaebe6?rule=original" alt="Foto 2"></button><button type="button" class="thumb" data-index="2"><img src="https://static.fotocasa.es/images/ads/94d70f53-785d-48e2-afac-1c6fe179a2fd?rule=original" alt="Foto 3"></button><button type="button" class="thumb" data-index="3"><img src="https://static.fotocasa.es/images/ads/13336ce6-6daa-46d7-a6f2-e6529db921b9?rule=original" alt="Foto 4"></button><button type="button" class="thumb" data-index="4"><img src="https://static.fotocasa.es/images/ads/b5c9a265-cfe3-439f-a621-13471f4a9b37?rule=original" alt="Foto 5"></button><button type="button" class="thumb" data-index="5"><img src="https://static.fotocasa.es/images/ads/2af43372-247e-4b61-8c45-4d227295eced?rule=original" alt="Foto 6"></button><button type="button" class="thumb" data-index="6"><img src="https://static.fotocasa.es/images/ads/7d5c8b5b-8f79-4bc3-b0de-8cd0a8147fc7?rule=original" alt="Foto 7"></button><button type="button" class="thumb" data-index="7"><img src="https://static.fotocasa.es/images/ads/b0fefee9-9ed8-4a07-9937-191792e85d41?rule=original" alt="Foto 8"></button><button type="button" class="thumb" data-index="8"><img src="https://static.fotocasa.es/images/ads/1d07a483-459f-4815-a4d1-ac81ce5693fa?rule=original" alt="Foto 9"></button><button type="button" class="thumb" data-index="9"><img src="https://static.fotocasa.es/images/ads/8f1f1049-b5ac-4338-ab3b-6f07c3b5b3d2?rule=original" alt="Foto 10"></button><button type="button" class="thumb" data-index="10"><img src="https://static.fotocasa.es/images/ads/82c76265-af4a-467a-8dd9-d5c3ba56f7e0?rule=original" alt="Foto 11"></button><button type="button" class="thumb" data-index="11"><img src="https://static.fotocasa.es/images/ads/bb73f0e9-9efb-462b-a5bb-fad242905d19?rule=original" alt="Foto 12"></button><button type="button" class="thumb" data-index="12"><img src="https://static.fotocasa.es/images/ads/d0904601-2916-44da-aed4-45e249bf6da9?rule=original" alt="Foto 13"></button><button type="button" class="thumb" data-index="13"><img src="https://static.fotocasa.es/images/ads/463867fe-1243-45c4-8ce5-0f8700cc93fa?rule=original" alt="Foto 14"></button><button type="button" class="thumb" data-index="14"><img src="https://static.fotocasa.es/images/ads/2235a4b0-ab39-4fa8-b369-00078121b900?rule=original" alt="Foto 15"></button><button type="button" class="thumb" data-index="15"><img src="https://static.fotocasa.es/images/ads/b6fbcf1c-c8df-4364-bdc7-0da27cfa8186?rule=original" alt="Foto 16"></button><button type="button" class="thumb" data-index="16"><img src="https://static.fotocasa.es/images/ads/2dd3618d-cee2-4615-8aa6-545e76f3a770?rule=original" alt="Foto 17"></button><button type="button" class="thumb" data-index="17"><img src="https://static.fotocasa.es/images/ads/eb7ba88b-b8ca-43ff-81d4-8ea2e71efa35?rule=original" alt="Foto 18"></button><button type="button" class="thumb" data-index="18"><img src="https://static.fotocasa.es/images/ads/fb7e0ce9-8280-4d73-8846-29d701e0e741?rule=original" alt="Foto 19"></button><button type="button" class="thumb" data-index="19"><img src="https://static.fotocasa.es/images/ads/9ba03be2-7347-4d7a-b54a-846c14b39cab?rule=original" alt="Foto 20"></button><button type="button" class="thumb" data-index="20"><img src="https://static.fotocasa.es/images/ads/aee62794-0732-4805-997e-286f8ea2b654?rule=original" alt="Foto 21"></button><button type="button" class="thumb" data-index="21"><img src="https://static.fotocasa.es/images/ads/13acc4b9-ae7e-42d8-aaf2-cdb6566ec82e?rule=original" alt="Foto 22"></button><button type="button" class="thumb" data-index="22"><img src="https://static.fotocasa.es/images/ads/93d05f5b-3bcc-4292-801f-4b9c793f146b?rule=original" alt="Foto 23"></button></div>
+      </section>
+      <aside class="panel">
+        <div class="score">100/100 encaje</div>
+        <h1>Piso en venta en Calle Rambla del Nacimiento, 4, Campoamor</h1>
+        <p class="location">Calle Rambla del Nacimiento, 4, Campoamor</p>
+        <div class="price">290.000 EUR</div>
+        <div class="delta above">+23.134 EUR frente al ML</div>
+        <div class="metrics">
+          <div><strong>3</strong><span>Habitaciones</span></div>
+          <div><strong>2</strong><span>Banos</span></div>
+          <div><strong>103 m2</strong><span>Superficie</span></div>
+          <div><strong>2.815 EUR</strong><span>Precio por m2</span></div>
+        </div>
+        <p class="summary">En pleno Pinada, encontramos esta Urbanización del Pinar, con una ubicación privilegiada, toda ella rodeada de vegetación, grandes arboles y jardnes preciososos. Un encantador entorno en el que encontramos 5 edificios que cuentan con piscina privada, pistas.</p>
+        <div class="actions">
+          <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/parking-zona-comunitaria-ascensor-amueblado-piscina/188928739/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+          <button class="ghost" type="button" id="copy">Copiar enlace</button>
+        </div>
+      </aside>
+    </div>
+    <section class="analysis">
+      <section>
+        <h2>Por que encaja</h2>
+        <ul><li>Tiene al menos dos dormitorios.</li><li>Tiene una superficie interesante para la zona.</li><li>Menciona extras valorables como terraza, piscina, jardin o parking.</li></ul>
+      </section>
+      <section>
+        <h2>Riesgos</h2>
+        <ul><li>El precio esta por encima de la estimacion del modelo.</li></ul>
+      </section>
+    </section>
+    <p class="description">En pleno Pinada, encontramos esta Urbanización del Pinar, con una ubicación privilegiada, toda ella rodeada de vegetación, grandes arboles y jardnes preciososos. Un encantador entorno en el que encontramos 5 edificios que cuentan con piscina privada, pistas de tenis, parque infantil, etc,. El piso en cuestión, está en la Quinta torre, que hace esquina y es una penultima planta, lo que lo convierte en una vivienda muy fresca y orientada a sur-este, levante. La casa además es una chulada, completamente reformada, con mucho estilo, modernidad, sin restar confort. Una preciosa vivienda que cuenta con 3 dormitorios y 2 baños, la zona de la terraza la han incorporado a la vivienda con un doble acristalamiento. La vivienda tambien cuenta con AACC y una plaza privada de parking.</p>
+  </main>
+  <script>
+    const images = ["https://static.fotocasa.es/images/ads/e4e822bc-ed62-4f6a-a4a5-9c0b0f7bc269?rule=original", "https://static.fotocasa.es/images/ads/bcb1b4d3-b600-4e22-9bdf-adcb5acaebe6?rule=original", "https://static.fotocasa.es/images/ads/94d70f53-785d-48e2-afac-1c6fe179a2fd?rule=original", "https://static.fotocasa.es/images/ads/13336ce6-6daa-46d7-a6f2-e6529db921b9?rule=original", "https://static.fotocasa.es/images/ads/b5c9a265-cfe3-439f-a621-13471f4a9b37?rule=original", "https://static.fotocasa.es/images/ads/2af43372-247e-4b61-8c45-4d227295eced?rule=original", "https://static.fotocasa.es/images/ads/7d5c8b5b-8f79-4bc3-b0de-8cd0a8147fc7?rule=original", "https://static.fotocasa.es/images/ads/b0fefee9-9ed8-4a07-9937-191792e85d41?rule=original", "https://static.fotocasa.es/images/ads/1d07a483-459f-4815-a4d1-ac81ce5693fa?rule=original", "https://static.fotocasa.es/images/ads/8f1f1049-b5ac-4338-ab3b-6f07c3b5b3d2?rule=original", "https://static.fotocasa.es/images/ads/82c76265-af4a-467a-8dd9-d5c3ba56f7e0?rule=original", "https://static.fotocasa.es/images/ads/bb73f0e9-9efb-462b-a5bb-fad242905d19?rule=original", "https://static.fotocasa.es/images/ads/d0904601-2916-44da-aed4-45e249bf6da9?rule=original", "https://static.fotocasa.es/images/ads/463867fe-1243-45c4-8ce5-0f8700cc93fa?rule=original", "https://static.fotocasa.es/images/ads/2235a4b0-ab39-4fa8-b369-00078121b900?rule=original", "https://static.fotocasa.es/images/ads/b6fbcf1c-c8df-4364-bdc7-0da27cfa8186?rule=original", "https://static.fotocasa.es/images/ads/2dd3618d-cee2-4615-8aa6-545e76f3a770?rule=original", "https://static.fotocasa.es/images/ads/eb7ba88b-b8ca-43ff-81d4-8ea2e71efa35?rule=original", "https://static.fotocasa.es/images/ads/fb7e0ce9-8280-4d73-8846-29d701e0e741?rule=original", "https://static.fotocasa.es/images/ads/9ba03be2-7347-4d7a-b54a-846c14b39cab?rule=original", "https://static.fotocasa.es/images/ads/aee62794-0732-4805-997e-286f8ea2b654?rule=original", "https://static.fotocasa.es/images/ads/13acc4b9-ae7e-42d8-aaf2-cdb6566ec82e?rule=original", "https://static.fotocasa.es/images/ads/93d05f5b-3bcc-4292-801f-4b9c793f146b?rule=original"];
+    const mainPhoto = document.getElementById("main-photo");
+    const counter = document.getElementById("counter");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let current = 0;
+
+    function show(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      mainPhoto.src = images[current];
+      counter.textContent = `${current + 1}/${images.length}`;
+      thumbs.forEach((thumb, itemIndex) => thumb.classList.toggle("active", itemIndex === current));
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => show(current - 1));
+    document.querySelector(".next").addEventListener("click", () => show(current + 1));
+    thumbs.forEach(thumb => thumb.addEventListener("click", () => show(Number(thumb.dataset.index))));
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://www.fotocasa.es/es/comprar/vivienda/orihuela/parking-zona-comunitaria-ascensor-amueblado-piscina/188928739/d");
+      } catch (error) {
+        window.prompt("Copia el enlace", "https://www.fotocasa.es/es/comprar/vivienda/orihuela/parking-zona-comunitaria-ascensor-amueblado-piscina/188928739/d");
+      }
+    });
+  </script>
+</body>
+</html>

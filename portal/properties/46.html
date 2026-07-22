@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Piso en venta en Campoamor</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #667085;
+      --line: #d7dfdc;
+      --accent: #0f766e;
+      --accent-dark: #0a4f49;
+      --good: #137a3f;
+      --bad: #a33b2f;
+      --panel: #fff;
+      --soft: #eef3f1;
+      --warm: #fbf6ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f7f6;
+    }
+    a, button { font: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 18px 20px 54px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back, .external {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 10px 13px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+    .back { background: #18212d; }
+    .external:hover { background: var(--accent-dark); }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+    .gallery, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17, 24, 39, .09);
+    }
+    .stage {
+      position: relative;
+      background: #dbe4e2;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .stage img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+    .counter {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+    }
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 10px;
+      max-height: 230px;
+      overflow: auto;
+    }
+    .thumb {
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      aspect-ratio: 4 / 3;
+    }
+    .thumb.active { border-color: var(--accent); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .panel { padding: 20px; }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 30px; line-height: 1.12; margin: 0 0 10px; letter-spacing: 0; }
+    .location { margin: 0 0 16px; color: var(--muted); }
+    .price { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .delta { font-weight: 900; margin-bottom: 16px; }
+    .delta.below { color: var(--good); }
+    .delta.above { color: var(--bad); }
+    .delta.near { color: var(--accent); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .metrics div {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .metrics strong { display: block; }
+    .metrics span { color: var(--muted); font-size: 13px; }
+    .summary, .description {
+      color: #344054;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .analysis section {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .analysis h2 { font-size: 15px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #344054;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .stage, .stage img { height: 430px; min-height: 430px; }
+    }
+    @media (max-width: 560px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+      .stage, .stage img { height: 300px; min-height: 300px; }
+      .analysis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <a class="back" href="../index.html">Volver al ranking</a>
+      <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/piscina-amueblado/190159484/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+    </div>
+    <div class="layout">
+      <section class="gallery">
+        <div class="stage">
+          <button class="nav prev" type="button" aria-label="Foto anterior">&#8249;</button>
+          <img id="main-photo" src="https://static.fotocasa.es/images/ads/7b849a63-e3cb-4cfc-8f3c-c52a8f3ee5cd?rule=original" alt="Piso en venta en Campoamor">
+          <button class="nav next" type="button" aria-label="Foto siguiente">&#8250;</button>
+          <div class="counter" id="counter">1/19</div>
+        </div>
+        <div class="thumbs"><button type="button" class="thumb active" data-index="0"><img src="https://static.fotocasa.es/images/ads/7b849a63-e3cb-4cfc-8f3c-c52a8f3ee5cd?rule=original" alt="Foto 1"></button><button type="button" class="thumb" data-index="1"><img src="https://static.fotocasa.es/images/ads/514da05c-c79b-456b-831d-a835f4fe3d5c?rule=original" alt="Foto 2"></button><button type="button" class="thumb" data-index="2"><img src="https://static.fotocasa.es/images/ads/5d4e211d-7f5c-40c7-8490-f4fd5e4864cc?rule=original" alt="Foto 3"></button><button type="button" class="thumb" data-index="3"><img src="https://static.fotocasa.es/images/ads/5691efea-367a-4eb4-bb85-98cd228a7248?rule=original" alt="Foto 4"></button><button type="button" class="thumb" data-index="4"><img src="https://static.fotocasa.es/images/ads/cabbe5dc-8bb4-4cb3-b1a0-58eaaf665938?rule=original" alt="Foto 5"></button><button type="button" class="thumb" data-index="5"><img src="https://static.fotocasa.es/images/ads/0cc7bb45-807d-423c-9ec0-37480436ce54?rule=original" alt="Foto 6"></button><button type="button" class="thumb" data-index="6"><img src="https://static.fotocasa.es/images/ads/5c7ce75f-b568-4a62-b9a6-a52b6b4fc1ec?rule=original" alt="Foto 7"></button><button type="button" class="thumb" data-index="7"><img src="https://static.fotocasa.es/images/ads/03667360-2f5a-4294-ab7c-1ab11aac131b?rule=original" alt="Foto 8"></button><button type="button" class="thumb" data-index="8"><img src="https://static.fotocasa.es/images/ads/9451e8e5-eb1a-49df-aa76-e7f6893aa4bf?rule=original" alt="Foto 9"></button><button type="button" class="thumb" data-index="9"><img src="https://static.fotocasa.es/images/ads/de5f03a0-a1a7-4a95-bdf4-83d57dc3d5a1?rule=original" alt="Foto 10"></button><button type="button" class="thumb" data-index="10"><img src="https://static.fotocasa.es/images/ads/d193d4e5-e41b-400f-997c-e805d638533c?rule=original" alt="Foto 11"></button><button type="button" class="thumb" data-index="11"><img src="https://static.fotocasa.es/images/ads/032b4670-9d4f-4737-9a99-21cfa0fc7129?rule=original" alt="Foto 12"></button><button type="button" class="thumb" data-index="12"><img src="https://static.fotocasa.es/images/ads/7a60a7f4-ec62-49bd-9e73-e5a6d8f31d0e?rule=original" alt="Foto 13"></button><button type="button" class="thumb" data-index="13"><img src="https://static.fotocasa.es/images/ads/662ec1d5-e47c-47f4-a2a1-54c6f33051e7?rule=original" alt="Foto 14"></button><button type="button" class="thumb" data-index="14"><img src="https://static.fotocasa.es/images/ads/3d871eb6-cb84-4cdb-af49-39fac52ca352?rule=original" alt="Foto 15"></button><button type="button" class="thumb" data-index="15"><img src="https://static.fotocasa.es/images/ads/32a986a1-d40d-4cc4-b7a2-0d4d6a1bbfa4?rule=original" alt="Foto 16"></button><button type="button" class="thumb" data-index="16"><img src="https://static.fotocasa.es/images/ads/a4f74b43-4bf4-42dc-8856-463b2ec31f06?rule=original" alt="Foto 17"></button><button type="button" class="thumb" data-index="17"><img src="https://static.fotocasa.es/images/ads/53d19cee-5715-4bed-a123-79f4e38f082a?rule=original" alt="Foto 18"></button><button type="button" class="thumb" data-index="18"><img src="https://static.fotocasa.es/images/ads/4829828b-7c26-492e-ac01-9f4915bb65d6?rule=original" alt="Foto 19"></button></div>
+      </section>
+      <aside class="panel">
+        <div class="score">100/100 encaje</div>
+        <h1>Piso en venta en Campoamor</h1>
+        <p class="location">Campoamor</p>
+        <div class="price">205.000 EUR</div>
+        <div class="delta below">-15.884 EUR frente al ML</div>
+        <div class="metrics">
+          <div><strong>2</strong><span>Habitaciones</span></div>
+          <div><strong>1</strong><span>Banos</span></div>
+          <div><strong>72 m2</strong><span>Superficie</span></div>
+          <div><strong>2.847 EUR</strong><span>Precio por m2</span></div>
+        </div>
+        <p class="summary">Si buscas un apartamento en Dehesa de Campoamor listo para entrar a vivir, con amplias zonas comunes y cerca del mar, esta vivienda reúne una excelente combinación de ubicación, comodidad y servicios.~~Situado en una segunda planta dentro de un cuidado.</p>
+        <div class="actions">
+          <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/piscina-amueblado/190159484/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+          <button class="ghost" type="button" id="copy">Copiar enlace</button>
+        </div>
+      </aside>
+    </div>
+    <section class="analysis">
+      <section>
+        <h2>Por que encaja</h2>
+        <ul><li>Sale por debajo de la estimacion del modelo de precio.</li><li>Tiene al menos dos dormitorios.</li><li>Tiene una superficie interesante para la zona.</li><li>Menciona extras valorables como terraza, piscina, jardin o parking.</li></ul>
+      </section>
+      <section>
+        <h2>Riesgos</h2>
+        <ul><li>Sin riesgos destacados en los datos disponibles.</li></ul>
+      </section>
+    </section>
+    <p class="description">Si buscas un apartamento en Dehesa de Campoamor listo para entrar a vivir, con amplias zonas comunes y cerca del mar, esta vivienda reúne una excelente combinación de ubicación, comodidad y servicios.~~Situado en una segunda planta dentro de un cuidado residencial con piscina comunitaria y amplias zonas verdes, este luminoso apartamento ofrece una distribución muy práctica para disfrutar tanto de vacaciones como de largas estancias durante todo el año.~~La vivienda dispone de un acogedor salón-comedor con salida directa a una agradable terraza orientada hacia la piscina y los jardines, un espacio perfecto para desayunar al aire libre, relajarse o disfrutar del clima mediterráneo.~~La cocina independiente ofrece un espacio funcional y cómodo, acompañada de un práctico aseo de cortesía, ideal para el día a día o cuando se reciben invitados.~La zona de descanso está formada por dos amplios dormitorios dobles, ambos con armarios empotrados. El dormitorio principal cuenta además con acceso directo a la terraza, aportando una agradable sensación de amplitud y luminosidad. Completa la vivienda un baño completo con plato de ducha.~~El apartamento se vende amueblado (excepto algunos efectos personales), permitiendo entrar a disfrutar de la vivienda prácticamente desde el primer día.~~Además, el precio incluye una plaza de garaje subterránea y un trastero, dos elementos muy valorados en una zona residencial como Campoamor.~~Su ubicación es otro de sus grandes atractivos. Se encuentra aproximadamente a 800 metros de las playas de arena de Dehesa de Campoamor, muy cerca del puerto deportivo, supermercados, restaurantes, cafeterías, farmacia y todos los servicios necesarios para vivir cómodamente durante todo el año.~~Características principales:~Segunda planta.~2 dormitorios dobles con armarios empotrados.~1 baño completo con plato de ducha.~1 aseo de cortesía.~Cocina independiente.~Salón-comedor muy luminoso.~Terraza con vistas a la piscina y jardines.~Acceso a la terraza desde el dormitorio principal.~Piscina comunitaria.~Amplias zonas verdes.~Plaza de garaje subterránea incluida.~Trastero incluido.~Se vende amueblado (excepto algunos efectos personales).~Aproximadamente a 800 metros de las playas de Dehesa de Campoamor. ~~ITP no incluido en el precio.</p>
+  </main>
+  <script>
+    const images = ["https://static.fotocasa.es/images/ads/7b849a63-e3cb-4cfc-8f3c-c52a8f3ee5cd?rule=original", "https://static.fotocasa.es/images/ads/514da05c-c79b-456b-831d-a835f4fe3d5c?rule=original", "https://static.fotocasa.es/images/ads/5d4e211d-7f5c-40c7-8490-f4fd5e4864cc?rule=original", "https://static.fotocasa.es/images/ads/5691efea-367a-4eb4-bb85-98cd228a7248?rule=original", "https://static.fotocasa.es/images/ads/cabbe5dc-8bb4-4cb3-b1a0-58eaaf665938?rule=original", "https://static.fotocasa.es/images/ads/0cc7bb45-807d-423c-9ec0-37480436ce54?rule=original", "https://static.fotocasa.es/images/ads/5c7ce75f-b568-4a62-b9a6-a52b6b4fc1ec?rule=original", "https://static.fotocasa.es/images/ads/03667360-2f5a-4294-ab7c-1ab11aac131b?rule=original", "https://static.fotocasa.es/images/ads/9451e8e5-eb1a-49df-aa76-e7f6893aa4bf?rule=original", "https://static.fotocasa.es/images/ads/de5f03a0-a1a7-4a95-bdf4-83d57dc3d5a1?rule=original", "https://static.fotocasa.es/images/ads/d193d4e5-e41b-400f-997c-e805d638533c?rule=original", "https://static.fotocasa.es/images/ads/032b4670-9d4f-4737-9a99-21cfa0fc7129?rule=original", "https://static.fotocasa.es/images/ads/7a60a7f4-ec62-49bd-9e73-e5a6d8f31d0e?rule=original", "https://static.fotocasa.es/images/ads/662ec1d5-e47c-47f4-a2a1-54c6f33051e7?rule=original", "https://static.fotocasa.es/images/ads/3d871eb6-cb84-4cdb-af49-39fac52ca352?rule=original", "https://static.fotocasa.es/images/ads/32a986a1-d40d-4cc4-b7a2-0d4d6a1bbfa4?rule=original", "https://static.fotocasa.es/images/ads/a4f74b43-4bf4-42dc-8856-463b2ec31f06?rule=original", "https://static.fotocasa.es/images/ads/53d19cee-5715-4bed-a123-79f4e38f082a?rule=original", "https://static.fotocasa.es/images/ads/4829828b-7c26-492e-ac01-9f4915bb65d6?rule=original"];
+    const mainPhoto = document.getElementById("main-photo");
+    const counter = document.getElementById("counter");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let current = 0;
+
+    function show(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      mainPhoto.src = images[current];
+      counter.textContent = `${current + 1}/${images.length}`;
+      thumbs.forEach((thumb, itemIndex) => thumb.classList.toggle("active", itemIndex === current));
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => show(current - 1));
+    document.querySelector(".next").addEventListener("click", () => show(current + 1));
+    thumbs.forEach(thumb => thumb.addEventListener("click", () => show(Number(thumb.dataset.index))));
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://www.fotocasa.es/es/comprar/vivienda/orihuela/piscina-amueblado/190159484/d");
+      } catch (error) {
+        window.prompt("Copia el enlace", "https://www.fotocasa.es/es/comprar/vivienda/orihuela/piscina-amueblado/190159484/d");
+      }
+    });
+  </script>
+</body>
+</html>

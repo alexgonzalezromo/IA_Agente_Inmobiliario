@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apartamento en venta en Campoamor</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #667085;
+      --line: #d7dfdc;
+      --accent: #0f766e;
+      --accent-dark: #0a4f49;
+      --good: #137a3f;
+      --bad: #a33b2f;
+      --panel: #fff;
+      --soft: #eef3f1;
+      --warm: #fbf6ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f7f6;
+    }
+    a, button { font: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 18px 20px 54px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back, .external {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 10px 13px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+    .back { background: #18212d; }
+    .external:hover { background: var(--accent-dark); }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+    .gallery, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17, 24, 39, .09);
+    }
+    .stage {
+      position: relative;
+      background: #dbe4e2;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .stage img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+    .counter {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+    }
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 10px;
+      max-height: 230px;
+      overflow: auto;
+    }
+    .thumb {
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      aspect-ratio: 4 / 3;
+    }
+    .thumb.active { border-color: var(--accent); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .panel { padding: 20px; }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 30px; line-height: 1.12; margin: 0 0 10px; letter-spacing: 0; }
+    .location { margin: 0 0 16px; color: var(--muted); }
+    .price { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .delta { font-weight: 900; margin-bottom: 16px; }
+    .delta.below { color: var(--good); }
+    .delta.above { color: var(--bad); }
+    .delta.near { color: var(--accent); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .metrics div {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .metrics strong { display: block; }
+    .metrics span { color: var(--muted); font-size: 13px; }
+    .summary, .description {
+      color: #344054;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .analysis section {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .analysis h2 { font-size: 15px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #344054;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .stage, .stage img { height: 430px; min-height: 430px; }
+    }
+    @media (max-width: 560px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+      .stage, .stage img { height: 300px; min-height: 300px; }
+      .analysis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <a class="back" href="../index.html">Volver al ranking</a>
+      <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-parking-terraza-piscina-amueblado-piscina/190290718/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+    </div>
+    <div class="layout">
+      <section class="gallery">
+        <div class="stage">
+          <button class="nav prev" type="button" aria-label="Foto anterior">&#8249;</button>
+          <img id="main-photo" src="https://static.fotocasa.es/images/ads/a1bde27b-0890-4851-91cb-709e7eb71311?rule=original" alt="Apartamento en venta en Campoamor">
+          <button class="nav next" type="button" aria-label="Foto siguiente">&#8250;</button>
+          <div class="counter" id="counter">1/38</div>
+        </div>
+        <div class="thumbs"><button type="button" class="thumb active" data-index="0"><img src="https://static.fotocasa.es/images/ads/a1bde27b-0890-4851-91cb-709e7eb71311?rule=original" alt="Foto 1"></button><button type="button" class="thumb" data-index="1"><img src="https://static.fotocasa.es/images/ads/408b5230-dea5-4675-8311-9a95579b9b7a?rule=original" alt="Foto 2"></button><button type="button" class="thumb" data-index="2"><img src="https://static.fotocasa.es/images/ads/a40f80ee-6f9f-42e5-9d0d-b0a22cccf26b?rule=original" alt="Foto 3"></button><button type="button" class="thumb" data-index="3"><img src="https://static.fotocasa.es/images/ads/74dd86fe-a2e0-4098-a7b2-9091b7896efa?rule=original" alt="Foto 4"></button><button type="button" class="thumb" data-index="4"><img src="https://static.fotocasa.es/images/ads/cb0e0f0d-917c-4ecb-be6d-2acd7d390177?rule=original" alt="Foto 5"></button><button type="button" class="thumb" data-index="5"><img src="https://static.fotocasa.es/images/ads/24594ae1-c5e2-4cfa-958e-add3037d139d?rule=original" alt="Foto 6"></button><button type="button" class="thumb" data-index="6"><img src="https://static.fotocasa.es/images/ads/90a99d4d-a5f4-4b8a-94ae-1862d8de401c?rule=original" alt="Foto 7"></button><button type="button" class="thumb" data-index="7"><img src="https://static.fotocasa.es/images/ads/a75ae7bd-200c-4fe8-aa37-08b6c14ab565?rule=original" alt="Foto 8"></button><button type="button" class="thumb" data-index="8"><img src="https://static.fotocasa.es/images/ads/b115b044-c8a7-4cd6-9375-1aa6b4c39685?rule=original" alt="Foto 9"></button><button type="button" class="thumb" data-index="9"><img src="https://static.fotocasa.es/images/ads/8f5a156c-9d0d-4621-9bd9-fe65a3309326?rule=original" alt="Foto 10"></button><button type="button" class="thumb" data-index="10"><img src="https://static.fotocasa.es/images/ads/54fed196-a401-468b-bd62-6c70f3851c1d?rule=original" alt="Foto 11"></button><button type="button" class="thumb" data-index="11"><img src="https://static.fotocasa.es/images/ads/18c2348d-f914-4163-85d4-00479797683e?rule=original" alt="Foto 12"></button><button type="button" class="thumb" data-index="12"><img src="https://static.fotocasa.es/images/ads/e7c2a5a3-1a42-4f84-aa8a-8165f25551e8?rule=original" alt="Foto 13"></button><button type="button" class="thumb" data-index="13"><img src="https://static.fotocasa.es/images/ads/135775c1-ffd8-47d4-9cfb-a95c4e18daa6?rule=original" alt="Foto 14"></button><button type="button" class="thumb" data-index="14"><img src="https://static.fotocasa.es/images/ads/cd7a1825-38d6-48ea-9729-a47bbc8b3ca9?rule=original" alt="Foto 15"></button><button type="button" class="thumb" data-index="15"><img src="https://static.fotocasa.es/images/ads/7b05b73a-e0bc-4163-865a-fe67ad8bcf68?rule=original" alt="Foto 16"></button><button type="button" class="thumb" data-index="16"><img src="https://static.fotocasa.es/images/ads/3728f13f-b8e0-4ae5-afd8-1b6316bb98b9?rule=original" alt="Foto 17"></button><button type="button" class="thumb" data-index="17"><img src="https://static.fotocasa.es/images/ads/3fb064bc-476a-42eb-b921-7224e501b056?rule=original" alt="Foto 18"></button><button type="button" class="thumb" data-index="18"><img src="https://static.fotocasa.es/images/ads/acd52c3e-6e4e-489c-b646-6c4acc90862f?rule=original" alt="Foto 19"></button><button type="button" class="thumb" data-index="19"><img src="https://static.fotocasa.es/images/ads/df677a7d-651d-4c10-b015-f965292cf2fc?rule=original" alt="Foto 20"></button><button type="button" class="thumb" data-index="20"><img src="https://static.fotocasa.es/images/ads/03f026e7-6b53-47da-950b-b46870ee52f8?rule=original" alt="Foto 21"></button><button type="button" class="thumb" data-index="21"><img src="https://static.fotocasa.es/images/ads/7f6197e1-3a4a-4a0a-8ec9-182a41d58d9a?rule=original" alt="Foto 22"></button><button type="button" class="thumb" data-index="22"><img src="https://static.fotocasa.es/images/ads/6a13a863-db45-4b66-8cb2-bdcd0a19694b?rule=original" alt="Foto 23"></button><button type="button" class="thumb" data-index="23"><img src="https://static.fotocasa.es/images/ads/957f2d7d-42bc-4959-a29d-0038dd37cb2a?rule=original" alt="Foto 24"></button><button type="button" class="thumb" data-index="24"><img src="https://static.fotocasa.es/images/ads/93298005-67c5-4345-b47a-9ff72e5cebbc?rule=original" alt="Foto 25"></button><button type="button" class="thumb" data-index="25"><img src="https://static.fotocasa.es/images/ads/ff0657cf-f0e1-4438-94ac-49b2e3199357?rule=original" alt="Foto 26"></button><button type="button" class="thumb" data-index="26"><img src="https://static.fotocasa.es/images/ads/ba4816c4-4d2f-4029-851d-c65f7d05a33c?rule=original" alt="Foto 27"></button><button type="button" class="thumb" data-index="27"><img src="https://static.fotocasa.es/images/ads/888e53e9-bfeb-47ec-a178-3a0b4c48d1ba?rule=original" alt="Foto 28"></button><button type="button" class="thumb" data-index="28"><img src="https://static.fotocasa.es/images/ads/82991d58-513f-4bad-ac56-dd170d974ad2?rule=original" alt="Foto 29"></button><button type="button" class="thumb" data-index="29"><img src="https://static.fotocasa.es/images/ads/01d0f799-bf23-4f69-bd0c-5654712c0a20?rule=original" alt="Foto 30"></button><button type="button" class="thumb" data-index="30"><img src="https://static.fotocasa.es/images/ads/6e06fcd7-c988-42cf-9768-d9a8f9daa4c3?rule=original" alt="Foto 31"></button><button type="button" class="thumb" data-index="31"><img src="https://static.fotocasa.es/images/ads/65aa9372-9178-4cf8-878a-d67cf0a2306a?rule=original" alt="Foto 32"></button><button type="button" class="thumb" data-index="32"><img src="https://static.fotocasa.es/images/ads/dbc1472a-96a3-4615-b695-df973c3c184b?rule=original" alt="Foto 33"></button><button type="button" class="thumb" data-index="33"><img src="https://static.fotocasa.es/images/ads/a464fce1-eca9-4b96-afed-35c2bcd17264?rule=original" alt="Foto 34"></button><button type="button" class="thumb" data-index="34"><img src="https://static.fotocasa.es/images/ads/9a07598a-98fa-4712-9f3c-b250a18f3b6c?rule=original" alt="Foto 35"></button><button type="button" class="thumb" data-index="35"><img src="https://static.fotocasa.es/images/ads/12c58423-895b-44ff-bd80-ca99449f917c?rule=original" alt="Foto 36"></button><button type="button" class="thumb" data-index="36"><img src="https://static.fotocasa.es/images/ads/af1b1712-0810-4bdb-998d-618c2ed55d72?rule=original" alt="Foto 37"></button><button type="button" class="thumb" data-index="37"><img src="https://static.fotocasa.es/images/ads/b065ce1f-ebbe-44da-9bd0-c7e54ea1375a?rule=original" alt="Foto 38"></button></div>
+      </section>
+      <aside class="panel">
+        <div class="score">100/100 encaje</div>
+        <h1>Apartamento en venta en Campoamor</h1>
+        <p class="location">Campoamor</p>
+        <div class="price">320.000 EUR</div>
+        <div class="delta above">+58.555 EUR frente al ML</div>
+        <div class="metrics">
+          <div><strong>3</strong><span>Habitaciones</span></div>
+          <div><strong>2</strong><span>Banos</span></div>
+          <div><strong>95 m2</strong><span>Superficie</span></div>
+          <div><strong>3.368 EUR</strong><span>Precio por m2</span></div>
+        </div>
+        <p class="summary">Descubra este fantástico apartamento en Cabo Roig que combina una ubicación privilegiada junto al Mediterráneo con unas espectaculares vistas al mar, convirtiéndose en una oportunidad excepcional para quienes desean disfrutar de la auténtica Costa Blanca.</p>
+        <div class="actions">
+          <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-parking-terraza-piscina-amueblado-piscina/190290718/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+          <button class="ghost" type="button" id="copy">Copiar enlace</button>
+        </div>
+      </aside>
+    </div>
+    <section class="analysis">
+      <section>
+        <h2>Por que encaja</h2>
+        <ul><li>Tiene al menos dos dormitorios.</li><li>Tiene una superficie interesante para la zona.</li><li>Menciona extras valorables como terraza, piscina, jardin o parking.</li></ul>
+      </section>
+      <section>
+        <h2>Riesgos</h2>
+        <ul><li>El precio esta por encima de la estimacion del modelo.</li></ul>
+      </section>
+    </section>
+    <p class="description">Descubra este fantástico apartamento en Cabo Roig que combina una ubicación privilegiada junto al Mediterráneo con unas espectaculares vistas al mar, convirtiéndose en una oportunidad excepcional para quienes desean disfrutar de la auténtica Costa Blanca durante todo el año. Con 95 m² construidos, esta elegante vivienda ofrece 3 dormitorios dobles y 2 baños, uno de ellos en suite, proporcionando el equilibrio perfecto entre amplitud, confort y funcionalidad. El luminoso salón-comedor conecta directamente con una magnífica terraza orientada al sur, un espacio pensado para relajarse, disfrutar del clima mediterráneo o compartir agradables veladas al aire libre mientras se contemplan las vistas al mar y a la renovada piscina comunitaria. La vivienda dispone además de cocina independiente, práctico lavadero, aire acondicionado frío/calor en todos los dormitorios, ventanas de doble acristalamiento, puerta de seguridad, armarios empotrados y se entrega completamente amueblada, lista para entrar a vivir desde el primer día. Como valor añadido, incluye plaza de garaje privada en el aparcamiento subterráneo. Situado en una de las zonas más prestigiosas de Orihuela Costa, a pocos minutos caminando de la playa, restaurantes, supermercados, comercios y todos los servicios, este apartamento representa una magnífica opción como residencia habitual, segunda vivienda o inversión inmobiliaria con un excelente potencial para alquiler vacacional gracias a su extraordinaria ubicación y a la elevada demanda de la zona.
+Clima:  
+  
+El clima en la Costa Blanca, a menudo considerado como el mejor de Europa, hace posible un estilo de vida muy sociable y saludable,  al aire libre, marcado por completas instalaciones deportivas y de ocio, con ciudades turísticas, excitantes y cosmopolitas, que destacan por la prestación de servicios máxima categoría, algunos de ellos exclusivos, considerados de auténtico lujo. Todos ellos destinados a un cliente exigente, que busca calidad y cercanía.   
+  
+La Costa Blanca cuenta con más de 300 días de sol al año. Un paraíso con excelentes conexiones a toda Europa. El Aeropuerto de Alicante-Elche cuenta con unas modernas instalaciones y con un fácil y cómodo acceso desde cualquier punto de la provincia.  
+  
+Entorno: 
+  
+La Costa Blanca sigue atrayendo a personas de toda Europa, y de otros lugares del mundo,  porque ofrece una calidad de vida única en un hermoso entorno a orillas del mar Mediterráneo, rodeado de montañas y de una exuberante vegetación.  
+  
+Además de los campos de golf y los puertos deportivos que podrás disfrutar por toda la costa, la zona también ofrece la posibilidad de esquiar en la cercana Sierra Nevada, Javalambre o Valdelinares, unos  paraísos para amantes de los deportes de invierno,  con hermosos paisajes naturales. La Costa Blanca ofrece un estilo de vida singularmente rico, donde las mejores playas y calas del Mediterráneo se combinan con un interior repleto de montañas y pueblos que esconden cultura y monumentos históricos únicos en el mundo.   
+  
+Tenemos un regalo para ti:  
+  
+Desde nuestra inmobiliaria le ayudamos a convertir su nueva propiedad en la casa de tus sueños, regalándole una visita técnica del departamento de diseño a la vivienda, donde nuestro equipo técnico le aconsejará sobre las posibilidades de mejora y decoración de su propiedad. Totalmente gratis!!
+  
+IMPORTANTE!!
+  
+Recuerde que nuestros servicios NO incrementan NUNCA el precio final de la vivienda a nuestros clientes. Nuestra experiencia en el sector nos convertirá en su aliado, un asesor de confianza que le ayudará a elegir la casa de sus sueños en la mejor zona, informarle sobre el precio de mercado de los inmuebles en los que estás interesado, las calidades empleadas, todo la información imprescindible y objetiva para que su experiencia sea totalmente satisfactoria.   
+  
+Nuestra agencia pertenece a un grupo de empresas consolidadas y especializadas todas ellas en el sector del hogar; arquitectura, interiorismo, mobiliario, asesoramiento en la compra venta de bienes raíces, etc. Estos recursos propios nos permiten ofrecer unos servicios únicos y exclusivos a nuestros clientes. Moderna y sensible con las nuevas tecnologías y oportunidades de mercado, también es pionera en ofrecer la posibilidad de realizar  transacciones inmobiliarias seguras y transparentes con criptomonedas.
+
+</p>
+  </main>
+  <script>
+    const images = ["https://static.fotocasa.es/images/ads/a1bde27b-0890-4851-91cb-709e7eb71311?rule=original", "https://static.fotocasa.es/images/ads/408b5230-dea5-4675-8311-9a95579b9b7a?rule=original", "https://static.fotocasa.es/images/ads/a40f80ee-6f9f-42e5-9d0d-b0a22cccf26b?rule=original", "https://static.fotocasa.es/images/ads/74dd86fe-a2e0-4098-a7b2-9091b7896efa?rule=original", "https://static.fotocasa.es/images/ads/cb0e0f0d-917c-4ecb-be6d-2acd7d390177?rule=original", "https://static.fotocasa.es/images/ads/24594ae1-c5e2-4cfa-958e-add3037d139d?rule=original", "https://static.fotocasa.es/images/ads/90a99d4d-a5f4-4b8a-94ae-1862d8de401c?rule=original", "https://static.fotocasa.es/images/ads/a75ae7bd-200c-4fe8-aa37-08b6c14ab565?rule=original", "https://static.fotocasa.es/images/ads/b115b044-c8a7-4cd6-9375-1aa6b4c39685?rule=original", "https://static.fotocasa.es/images/ads/8f5a156c-9d0d-4621-9bd9-fe65a3309326?rule=original", "https://static.fotocasa.es/images/ads/54fed196-a401-468b-bd62-6c70f3851c1d?rule=original", "https://static.fotocasa.es/images/ads/18c2348d-f914-4163-85d4-00479797683e?rule=original", "https://static.fotocasa.es/images/ads/e7c2a5a3-1a42-4f84-aa8a-8165f25551e8?rule=original", "https://static.fotocasa.es/images/ads/135775c1-ffd8-47d4-9cfb-a95c4e18daa6?rule=original", "https://static.fotocasa.es/images/ads/cd7a1825-38d6-48ea-9729-a47bbc8b3ca9?rule=original", "https://static.fotocasa.es/images/ads/7b05b73a-e0bc-4163-865a-fe67ad8bcf68?rule=original", "https://static.fotocasa.es/images/ads/3728f13f-b8e0-4ae5-afd8-1b6316bb98b9?rule=original", "https://static.fotocasa.es/images/ads/3fb064bc-476a-42eb-b921-7224e501b056?rule=original", "https://static.fotocasa.es/images/ads/acd52c3e-6e4e-489c-b646-6c4acc90862f?rule=original", "https://static.fotocasa.es/images/ads/df677a7d-651d-4c10-b015-f965292cf2fc?rule=original", "https://static.fotocasa.es/images/ads/03f026e7-6b53-47da-950b-b46870ee52f8?rule=original", "https://static.fotocasa.es/images/ads/7f6197e1-3a4a-4a0a-8ec9-182a41d58d9a?rule=original", "https://static.fotocasa.es/images/ads/6a13a863-db45-4b66-8cb2-bdcd0a19694b?rule=original", "https://static.fotocasa.es/images/ads/957f2d7d-42bc-4959-a29d-0038dd37cb2a?rule=original", "https://static.fotocasa.es/images/ads/93298005-67c5-4345-b47a-9ff72e5cebbc?rule=original", "https://static.fotocasa.es/images/ads/ff0657cf-f0e1-4438-94ac-49b2e3199357?rule=original", "https://static.fotocasa.es/images/ads/ba4816c4-4d2f-4029-851d-c65f7d05a33c?rule=original", "https://static.fotocasa.es/images/ads/888e53e9-bfeb-47ec-a178-3a0b4c48d1ba?rule=original", "https://static.fotocasa.es/images/ads/82991d58-513f-4bad-ac56-dd170d974ad2?rule=original", "https://static.fotocasa.es/images/ads/01d0f799-bf23-4f69-bd0c-5654712c0a20?rule=original", "https://static.fotocasa.es/images/ads/6e06fcd7-c988-42cf-9768-d9a8f9daa4c3?rule=original", "https://static.fotocasa.es/images/ads/65aa9372-9178-4cf8-878a-d67cf0a2306a?rule=original", "https://static.fotocasa.es/images/ads/dbc1472a-96a3-4615-b695-df973c3c184b?rule=original", "https://static.fotocasa.es/images/ads/a464fce1-eca9-4b96-afed-35c2bcd17264?rule=original", "https://static.fotocasa.es/images/ads/9a07598a-98fa-4712-9f3c-b250a18f3b6c?rule=original", "https://static.fotocasa.es/images/ads/12c58423-895b-44ff-bd80-ca99449f917c?rule=original", "https://static.fotocasa.es/images/ads/af1b1712-0810-4bdb-998d-618c2ed55d72?rule=original", "https://static.fotocasa.es/images/ads/b065ce1f-ebbe-44da-9bd0-c7e54ea1375a?rule=original"];
+    const mainPhoto = document.getElementById("main-photo");
+    const counter = document.getElementById("counter");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let current = 0;
+
+    function show(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      mainPhoto.src = images[current];
+      counter.textContent = `${current + 1}/${images.length}`;
+      thumbs.forEach((thumb, itemIndex) => thumb.classList.toggle("active", itemIndex === current));
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => show(current - 1));
+    document.querySelector(".next").addEventListener("click", () => show(current + 1));
+    thumbs.forEach(thumb => thumb.addEventListener("click", () => show(Number(thumb.dataset.index))));
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-parking-terraza-piscina-amueblado-piscina/190290718/d");
+      } catch (error) {
+        window.prompt("Copia el enlace", "https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-parking-terraza-piscina-amueblado-piscina/190290718/d");
+      }
+    });
+  </script>
+</body>
+</html>

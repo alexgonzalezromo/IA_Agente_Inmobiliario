@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>House_chalet en venta en Campoamor</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #667085;
+      --line: #d7dfdc;
+      --accent: #0f766e;
+      --accent-dark: #0a4f49;
+      --good: #137a3f;
+      --bad: #a33b2f;
+      --panel: #fff;
+      --soft: #eef3f1;
+      --warm: #fbf6ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f7f6;
+    }
+    a, button { font: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 18px 20px 54px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back, .external {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 10px 13px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+    .back { background: #18212d; }
+    .external:hover { background: var(--accent-dark); }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+    .gallery, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17, 24, 39, .09);
+    }
+    .stage {
+      position: relative;
+      background: #dbe4e2;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .stage img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+    .counter {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+    }
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 10px;
+      max-height: 230px;
+      overflow: auto;
+    }
+    .thumb {
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      aspect-ratio: 4 / 3;
+    }
+    .thumb.active { border-color: var(--accent); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .panel { padding: 20px; }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 30px; line-height: 1.12; margin: 0 0 10px; letter-spacing: 0; }
+    .location { margin: 0 0 16px; color: var(--muted); }
+    .price { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .delta { font-weight: 900; margin-bottom: 16px; }
+    .delta.below { color: var(--good); }
+    .delta.above { color: var(--bad); }
+    .delta.near { color: var(--accent); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .metrics div {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .metrics strong { display: block; }
+    .metrics span { color: var(--muted); font-size: 13px; }
+    .summary, .description {
+      color: #344054;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .analysis section {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .analysis h2 { font-size: 15px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #344054;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .stage, .stage img { height: 430px; min-height: 430px; }
+    }
+    @media (max-width: 560px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+      .stage, .stage img { height: 300px; min-height: 300px; }
+      .analysis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <a class="back" href="../index.html">Volver al ranking</a>
+      <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-jardin-terraza-trastero-patio/190090722/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+    </div>
+    <div class="layout">
+      <section class="gallery">
+        <div class="stage">
+          <button class="nav prev" type="button" aria-label="Foto anterior">&#8249;</button>
+          <img id="main-photo" src="https://static.fotocasa.es/images/ads/220adbff-f920-4198-9fcb-5ba7650a0b76?rule=original" alt="House_chalet en venta en Campoamor">
+          <button class="nav next" type="button" aria-label="Foto siguiente">&#8250;</button>
+          <div class="counter" id="counter">1/24</div>
+        </div>
+        <div class="thumbs"><button type="button" class="thumb active" data-index="0"><img src="https://static.fotocasa.es/images/ads/220adbff-f920-4198-9fcb-5ba7650a0b76?rule=original" alt="Foto 1"></button><button type="button" class="thumb" data-index="1"><img src="https://static.fotocasa.es/images/ads/ff8c2285-14ae-4f66-9f05-e9deb6d385aa?rule=original" alt="Foto 2"></button><button type="button" class="thumb" data-index="2"><img src="https://static.fotocasa.es/images/ads/7552cd65-5bc3-48fa-95c6-f3ceba14f1a4?rule=original" alt="Foto 3"></button><button type="button" class="thumb" data-index="3"><img src="https://static.fotocasa.es/images/ads/17802b87-10e1-4636-9590-54eca4b1f562?rule=original" alt="Foto 4"></button><button type="button" class="thumb" data-index="4"><img src="https://static.fotocasa.es/images/ads/4ddf9747-3d77-4cc7-9b05-bb79961ab2c8?rule=original" alt="Foto 5"></button><button type="button" class="thumb" data-index="5"><img src="https://static.fotocasa.es/images/ads/e95d832b-c904-41e2-8dc2-611d571f5e57?rule=original" alt="Foto 6"></button><button type="button" class="thumb" data-index="6"><img src="https://static.fotocasa.es/images/ads/8f985980-c167-4518-99d2-b2f69fca7445?rule=original" alt="Foto 7"></button><button type="button" class="thumb" data-index="7"><img src="https://static.fotocasa.es/images/ads/67413096-bab4-4671-ad52-6dd31f20b0d3?rule=original" alt="Foto 8"></button><button type="button" class="thumb" data-index="8"><img src="https://static.fotocasa.es/images/ads/13fc92a6-c655-47b3-9b6e-9c287d3d703d?rule=original" alt="Foto 9"></button><button type="button" class="thumb" data-index="9"><img src="https://static.fotocasa.es/images/ads/08182456-4188-4ae7-8a29-b4fb5cee4a03?rule=original" alt="Foto 10"></button><button type="button" class="thumb" data-index="10"><img src="https://static.fotocasa.es/images/ads/44a4c742-7752-4159-84d9-dbbbf26c023b?rule=original" alt="Foto 11"></button><button type="button" class="thumb" data-index="11"><img src="https://static.fotocasa.es/images/ads/f0fea40b-d136-4fe4-aa97-cd39749b8ba4?rule=original" alt="Foto 12"></button><button type="button" class="thumb" data-index="12"><img src="https://static.fotocasa.es/images/ads/a557dc7a-45ad-4111-ba07-2e8e5b3256f8?rule=original" alt="Foto 13"></button><button type="button" class="thumb" data-index="13"><img src="https://static.fotocasa.es/images/ads/c9c704c3-c8c5-40c2-ae38-aa3b410397b0?rule=original" alt="Foto 14"></button><button type="button" class="thumb" data-index="14"><img src="https://static.fotocasa.es/images/ads/e7edbab0-a3a2-4378-ae97-3ae308cea7e0?rule=original" alt="Foto 15"></button><button type="button" class="thumb" data-index="15"><img src="https://static.fotocasa.es/images/ads/4dbe3b7e-f6db-40de-b75f-e929341d9463?rule=original" alt="Foto 16"></button><button type="button" class="thumb" data-index="16"><img src="https://static.fotocasa.es/images/ads/bda036ec-ed47-476e-ad34-ea00529f7f86?rule=original" alt="Foto 17"></button><button type="button" class="thumb" data-index="17"><img src="https://static.fotocasa.es/images/ads/31d46cdd-cd20-4b75-a1cd-fff3083bdf73?rule=original" alt="Foto 18"></button><button type="button" class="thumb" data-index="18"><img src="https://static.fotocasa.es/images/ads/6cdfabbb-b483-45aa-acde-f399cd3d803c?rule=original" alt="Foto 19"></button><button type="button" class="thumb" data-index="19"><img src="https://static.fotocasa.es/images/ads/8725abc7-00d0-42a7-a2ab-741795b0270e?rule=original" alt="Foto 20"></button><button type="button" class="thumb" data-index="20"><img src="https://static.fotocasa.es/images/ads/f0634f71-35e0-4c7b-9735-108a20dc9605?rule=original" alt="Foto 21"></button><button type="button" class="thumb" data-index="21"><img src="https://static.fotocasa.es/images/ads/fbc8ff4c-bdb2-4bbb-bc42-d46f186d20ce?rule=original" alt="Foto 22"></button><button type="button" class="thumb" data-index="22"><img src="https://static.fotocasa.es/images/ads/6e0c213e-bb7f-4816-a0fc-65be94283973?rule=original" alt="Foto 23"></button><button type="button" class="thumb" data-index="23"><img src="https://static.fotocasa.es/images/ads/53b35821-7f16-4386-8996-839aadb4863f?rule=original" alt="Foto 24"></button></div>
+      </section>
+      <aside class="panel">
+        <div class="score">96/100 encaje</div>
+        <h1>House_chalet en venta en Campoamor</h1>
+        <p class="location">Campoamor</p>
+        <div class="price">350.000 EUR</div>
+        <div class="delta above">+141.790 EUR frente al ML</div>
+        <div class="metrics">
+          <div><strong>3</strong><span>Habitaciones</span></div>
+          <div><strong>2</strong><span>Banos</span></div>
+          <div><strong>70 m2</strong><span>Superficie</span></div>
+          <div><strong>5.000 EUR</strong><span>Precio por m2</span></div>
+        </div>
+        <p class="summary">Se vende chalet independiente listo para entrar a vivir, ubicado en la prestigiosa urbanización  Villas Campoamor . Esta propiedad se sitúa en una zona de alto valor turístico, combinando la privacidad de una vivienda exenta con la comodidad de encontrarse a.</p>
+        <div class="actions">
+          <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-jardin-terraza-trastero-patio/190090722/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+          <button class="ghost" type="button" id="copy">Copiar enlace</button>
+        </div>
+      </aside>
+    </div>
+    <section class="analysis">
+      <section>
+        <h2>Por que encaja</h2>
+        <ul><li>Tiene al menos dos dormitorios.</li><li>Tiene una superficie interesante para la zona.</li><li>Menciona extras valorables como terraza, piscina, jardin o parking.</li></ul>
+      </section>
+      <section>
+        <h2>Riesgos</h2>
+        <ul><li>El precio esta por encima de la estimacion del modelo.</li></ul>
+      </section>
+    </section>
+    <p class="description">Se vende chalet independiente listo para entrar a vivir, ubicado en la prestigiosa urbanización  Villas Campoamor . Esta propiedad se sitúa en una zona de alto valor turístico, combinando la privacidad de una vivienda exenta con la comodidad de encontrarse a tan solo 700 metros de  playa  grande y del puerto marítimo a escasa distancia de supermercado dentro de la villa, centros comerciales, restaurantes ,colegios, farmacias ,centro medico etc.
+
+La vivienda cuenta con una superficie construida de aproximadamente 70 metros cuadrados emplazada sobre una parcela privada de unos 230 metros cuadrados. El espacio exterior privado incluye zonas ajardinadas, árboles, un patio y una terraza orientada hacia la calle. El interior de la propiedad destaca por su luminosidad al ser un inmueble totalmente exterior. Dispone de tres habitaciones, dos baños, un amplio salón comedor y una cocina independiente equipada con varios electrodomésticos. En el apartado de calidades, presenta suelos de gres, carpintería exterior de aluminio y acabados interiores en madera. Toda la vivienda se entrega como esta en la galería fotográfica (parcialmente amueblada).
+
+El confort térmico está garantizado mediante un sistema de climatización por aire acondicionado independiente tipo split instalado en todos los dormitorios, el salón y la cocina, reforzado con bomba de frío y calor.
+
+Un aspecto diferencial de esta propiedad es el acceso exclusivo al polideportivo privado de la propia urbanización. Este complejo residencial ofrece unas instalaciones comunitarias del más alto nivel, dotadas de pistas de tenis, pistas de pádel, piscinas, zonas infantiles, chiringuitos y restaurantes de uso restringido para los residentes.
+
+Por su ubicación estratégica, la amplitud de sus espacios independientes y la exclusividad de los servicios comunitarios de la urbanización, esta propiedad representa una oportunidad excelente tanto para familias que buscan una residencia principal o vacacional de primer nivel, como para el perfil de comprador extranjero interesado en una inversión segura en la costa.
+
+Para solicitar más información sobre el inmueble o coordinar una visita presencial, póngase en contacto con nuestra oficina. 
+Nota Legal: Se informa al cliente que los gastos notariales, registrales, impuestos aplicables (ITP) y otros gastos inherentes a la compraventa, asi como los honorarios profesionales de agencia, no están incluidos en el precio.</p>
+  </main>
+  <script>
+    const images = ["https://static.fotocasa.es/images/ads/220adbff-f920-4198-9fcb-5ba7650a0b76?rule=original", "https://static.fotocasa.es/images/ads/ff8c2285-14ae-4f66-9f05-e9deb6d385aa?rule=original", "https://static.fotocasa.es/images/ads/7552cd65-5bc3-48fa-95c6-f3ceba14f1a4?rule=original", "https://static.fotocasa.es/images/ads/17802b87-10e1-4636-9590-54eca4b1f562?rule=original", "https://static.fotocasa.es/images/ads/4ddf9747-3d77-4cc7-9b05-bb79961ab2c8?rule=original", "https://static.fotocasa.es/images/ads/e95d832b-c904-41e2-8dc2-611d571f5e57?rule=original", "https://static.fotocasa.es/images/ads/8f985980-c167-4518-99d2-b2f69fca7445?rule=original", "https://static.fotocasa.es/images/ads/67413096-bab4-4671-ad52-6dd31f20b0d3?rule=original", "https://static.fotocasa.es/images/ads/13fc92a6-c655-47b3-9b6e-9c287d3d703d?rule=original", "https://static.fotocasa.es/images/ads/08182456-4188-4ae7-8a29-b4fb5cee4a03?rule=original", "https://static.fotocasa.es/images/ads/44a4c742-7752-4159-84d9-dbbbf26c023b?rule=original", "https://static.fotocasa.es/images/ads/f0fea40b-d136-4fe4-aa97-cd39749b8ba4?rule=original", "https://static.fotocasa.es/images/ads/a557dc7a-45ad-4111-ba07-2e8e5b3256f8?rule=original", "https://static.fotocasa.es/images/ads/c9c704c3-c8c5-40c2-ae38-aa3b410397b0?rule=original", "https://static.fotocasa.es/images/ads/e7edbab0-a3a2-4378-ae97-3ae308cea7e0?rule=original", "https://static.fotocasa.es/images/ads/4dbe3b7e-f6db-40de-b75f-e929341d9463?rule=original", "https://static.fotocasa.es/images/ads/bda036ec-ed47-476e-ad34-ea00529f7f86?rule=original", "https://static.fotocasa.es/images/ads/31d46cdd-cd20-4b75-a1cd-fff3083bdf73?rule=original", "https://static.fotocasa.es/images/ads/6cdfabbb-b483-45aa-acde-f399cd3d803c?rule=original", "https://static.fotocasa.es/images/ads/8725abc7-00d0-42a7-a2ab-741795b0270e?rule=original", "https://static.fotocasa.es/images/ads/f0634f71-35e0-4c7b-9735-108a20dc9605?rule=original", "https://static.fotocasa.es/images/ads/fbc8ff4c-bdb2-4bbb-bc42-d46f186d20ce?rule=original", "https://static.fotocasa.es/images/ads/6e0c213e-bb7f-4816-a0fc-65be94283973?rule=original", "https://static.fotocasa.es/images/ads/53b35821-7f16-4386-8996-839aadb4863f?rule=original"];
+    const mainPhoto = document.getElementById("main-photo");
+    const counter = document.getElementById("counter");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let current = 0;
+
+    function show(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      mainPhoto.src = images[current];
+      counter.textContent = `${current + 1}/${images.length}`;
+      thumbs.forEach((thumb, itemIndex) => thumb.classList.toggle("active", itemIndex === current));
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => show(current - 1));
+    document.querySelector(".next").addEventListener("click", () => show(current + 1));
+    thumbs.forEach(thumb => thumb.addEventListener("click", () => show(Number(thumb.dataset.index))));
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-jardin-terraza-trastero-patio/190090722/d");
+      } catch (error) {
+        window.prompt("Copia el enlace", "https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-jardin-terraza-trastero-patio/190090722/d");
+      }
+    });
+  </script>
+</body>
+</html>

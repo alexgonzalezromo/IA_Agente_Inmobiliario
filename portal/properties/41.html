@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>House_chalet en venta en  PONIENTE-CABO ROIG, 77, Cabo Roig</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #667085;
+      --line: #d7dfdc;
+      --accent: #0f766e;
+      --accent-dark: #0a4f49;
+      --good: #137a3f;
+      --bad: #a33b2f;
+      --panel: #fff;
+      --soft: #eef3f1;
+      --warm: #fbf6ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f7f6;
+    }
+    a, button { font: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 18px 20px 54px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back, .external {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 10px 13px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+    .back { background: #18212d; }
+    .external:hover { background: var(--accent-dark); }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+    .gallery, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17, 24, 39, .09);
+    }
+    .stage {
+      position: relative;
+      background: #dbe4e2;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .stage img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+    .counter {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+    }
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 10px;
+      max-height: 230px;
+      overflow: auto;
+    }
+    .thumb {
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      aspect-ratio: 4 / 3;
+    }
+    .thumb.active { border-color: var(--accent); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .panel { padding: 20px; }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 30px; line-height: 1.12; margin: 0 0 10px; letter-spacing: 0; }
+    .location { margin: 0 0 16px; color: var(--muted); }
+    .price { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .delta { font-weight: 900; margin-bottom: 16px; }
+    .delta.below { color: var(--good); }
+    .delta.above { color: var(--bad); }
+    .delta.near { color: var(--accent); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .metrics div {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .metrics strong { display: block; }
+    .metrics span { color: var(--muted); font-size: 13px; }
+    .summary, .description {
+      color: #344054;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .analysis section {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .analysis h2 { font-size: 15px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #344054;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .stage, .stage img { height: 430px; min-height: 430px; }
+    }
+    @media (max-width: 560px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+      .stage, .stage img { height: 300px; min-height: 300px; }
+      .analysis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <a class="back" href="../index.html">Volver al ranking</a>
+      <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/parking-terraza-piscina/189105595/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+    </div>
+    <div class="layout">
+      <section class="gallery">
+        <div class="stage">
+          <button class="nav prev" type="button" aria-label="Foto anterior">&#8249;</button>
+          <img id="main-photo" src="https://static.fotocasa.es/images/ads/21b4a825-99f8-4aae-92f7-3bb9f61f4911?rule=original" alt="House_chalet en venta en  PONIENTE-CABO ROIG, 77, Cabo Roig">
+          <button class="nav next" type="button" aria-label="Foto siguiente">&#8250;</button>
+          <div class="counter" id="counter">1/20</div>
+        </div>
+        <div class="thumbs"><button type="button" class="thumb active" data-index="0"><img src="https://static.fotocasa.es/images/ads/21b4a825-99f8-4aae-92f7-3bb9f61f4911?rule=original" alt="Foto 1"></button><button type="button" class="thumb" data-index="1"><img src="https://static.fotocasa.es/images/ads/3f79ab33-6f35-463a-86ed-d9fc4f388068?rule=original" alt="Foto 2"></button><button type="button" class="thumb" data-index="2"><img src="https://static.fotocasa.es/images/ads/9ab8775f-a699-4515-9176-5258052ed578?rule=original" alt="Foto 3"></button><button type="button" class="thumb" data-index="3"><img src="https://static.fotocasa.es/images/ads/781083c3-93e1-4878-a499-83406053d6b8?rule=original" alt="Foto 4"></button><button type="button" class="thumb" data-index="4"><img src="https://static.fotocasa.es/images/ads/2b473c27-30a2-45fc-92f4-5edaa822df37?rule=original" alt="Foto 5"></button><button type="button" class="thumb" data-index="5"><img src="https://static.fotocasa.es/images/ads/aec7a596-23fe-4db1-96a5-d2924b345ea8?rule=original" alt="Foto 6"></button><button type="button" class="thumb" data-index="6"><img src="https://static.fotocasa.es/images/ads/9e921ff1-4d9e-49bc-ad01-2ab14cee5ca8?rule=original" alt="Foto 7"></button><button type="button" class="thumb" data-index="7"><img src="https://static.fotocasa.es/images/ads/f3dba2ab-74a9-4bba-b463-7d1403ef0ada?rule=original" alt="Foto 8"></button><button type="button" class="thumb" data-index="8"><img src="https://static.fotocasa.es/images/ads/51dafc93-7e5c-41f3-b12f-4c7a1d8c1bc7?rule=original" alt="Foto 9"></button><button type="button" class="thumb" data-index="9"><img src="https://static.fotocasa.es/images/ads/d5a70080-77a9-43d0-aab4-53fcad465813?rule=original" alt="Foto 10"></button><button type="button" class="thumb" data-index="10"><img src="https://static.fotocasa.es/images/ads/13c7db45-ea06-46ce-9be9-f7a48e7ebaec?rule=original" alt="Foto 11"></button><button type="button" class="thumb" data-index="11"><img src="https://static.fotocasa.es/images/ads/da583897-2762-456c-8359-702bb9930883?rule=original" alt="Foto 12"></button><button type="button" class="thumb" data-index="12"><img src="https://static.fotocasa.es/images/ads/c736322f-60b9-4171-9852-9fec2ea988f7?rule=original" alt="Foto 13"></button><button type="button" class="thumb" data-index="13"><img src="https://static.fotocasa.es/images/ads/8b6c143b-77cf-46b3-a817-b7dff760a6ed?rule=original" alt="Foto 14"></button><button type="button" class="thumb" data-index="14"><img src="https://static.fotocasa.es/images/ads/18051e85-856a-4f5b-9d27-293a9bba8ec1?rule=original" alt="Foto 15"></button><button type="button" class="thumb" data-index="15"><img src="https://static.fotocasa.es/images/ads/54f23c35-9246-4bf1-b9f2-87d1fd2d72dc?rule=original" alt="Foto 16"></button><button type="button" class="thumb" data-index="16"><img src="https://static.fotocasa.es/images/ads/8e21d398-dd4e-40ea-ad60-497fc5f514bc?rule=original" alt="Foto 17"></button><button type="button" class="thumb" data-index="17"><img src="https://static.fotocasa.es/images/ads/7ef435b6-fd08-497a-9429-26cf87cb0618?rule=original" alt="Foto 18"></button><button type="button" class="thumb" data-index="18"><img src="https://static.fotocasa.es/images/ads/add89057-dc1f-49c9-86b2-01e4e42f67a3?rule=original" alt="Foto 19"></button><button type="button" class="thumb" data-index="19"><img src="https://static.fotocasa.es/images/ads/ef5de743-700d-4c00-acbf-f416bc20a0db?rule=original" alt="Foto 20"></button></div>
+      </section>
+      <aside class="panel">
+        <div class="score">79/100 encaje</div>
+        <h1>House_chalet en venta en  PONIENTE-CABO ROIG, 77, Cabo Roig</h1>
+        <p class="location"> PONIENTE-CABO ROIG, 77, Cabo Roig</p>
+        <div class="price">230.000 EUR</div>
+        <div class="delta above">+35.719 EUR frente al ML</div>
+        <div class="metrics">
+          <div><strong>2</strong><span>Habitaciones</span></div>
+          <div><strong>1</strong><span>Banos</span></div>
+          <div><strong>59 m2</strong><span>Superficie</span></div>
+          <div><strong>3.898 EUR</strong><span>Precio por m2</span></div>
+        </div>
+        <p class="summary">MAYMAR les presenta este acogedor bungalow en planta baja ubicado en Cabo Roig, una de las zonas más demandadas de Orihuela Costa, conocida por su ambiente residencial, su cercanía al mar y su excelente oferta de servicios.
+
+Situada en Calle Poniente, esta.</p>
+        <div class="actions">
+          <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/parking-terraza-piscina/189105595/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+          <button class="ghost" type="button" id="copy">Copiar enlace</button>
+        </div>
+      </aside>
+    </div>
+    <section class="analysis">
+      <section>
+        <h2>Por que encaja</h2>
+        <ul><li>Tiene al menos dos dormitorios.</li><li>Menciona extras valorables como terraza, piscina, jardin o parking.</li></ul>
+      </section>
+      <section>
+        <h2>Riesgos</h2>
+        <ul><li>El precio esta por encima de la estimacion del modelo.</li></ul>
+      </section>
+    </section>
+    <p class="description">MAYMAR les presenta este acogedor bungalow en planta baja ubicado en Cabo Roig, una de las zonas más demandadas de Orihuela Costa, conocida por su ambiente residencial, su cercanía al mar y su excelente oferta de servicios.
+
+Situada en Calle Poniente, esta propiedad se encuentra dentro de una tranquila urbanización, rodeada de zonas residenciales, restaurantes y comercios, y a pocos minutos de las playas y del paseo marítimo de la zona.
+
+Con una superficie de 59 m2, la vivienda se ubica en planta baja y se encuentra en buen estado de conservación, lo que la convierte en una excelente oportunidad tanto como residencia habitual, vivienda vacacional o inversión.
+
+En la zona de día encontramos un luminoso salón-comedor con cocina integrada, creando un espacio funcional y cómodo para el día a día. Desde la vivienda se accede a una agradable terraza, perfecta para disfrutar del clima mediterráneo.
+
+La zona de descanso dispone de dos dormitorios con armarios empotrados y un baño completo.
+
+La propiedad cuenta además con ventanas Climalit que aportan un buen aislamiento térmico y acústico, así como plaza de parking incluida.
+
+La urbanización ofrece piscina comunitaria y zonas comunes cuidadas, ideales para disfrutar del buen tiempo durante todo el año.
+
+Una vivienda funcional y cómoda, perfecta para quienes buscan disfrutar del estilo de vida mediterráneo en una de las zonas más atractivas de Orihuela Costa.</p>
+  </main>
+  <script>
+    const images = ["https://static.fotocasa.es/images/ads/21b4a825-99f8-4aae-92f7-3bb9f61f4911?rule=original", "https://static.fotocasa.es/images/ads/3f79ab33-6f35-463a-86ed-d9fc4f388068?rule=original", "https://static.fotocasa.es/images/ads/9ab8775f-a699-4515-9176-5258052ed578?rule=original", "https://static.fotocasa.es/images/ads/781083c3-93e1-4878-a499-83406053d6b8?rule=original", "https://static.fotocasa.es/images/ads/2b473c27-30a2-45fc-92f4-5edaa822df37?rule=original", "https://static.fotocasa.es/images/ads/aec7a596-23fe-4db1-96a5-d2924b345ea8?rule=original", "https://static.fotocasa.es/images/ads/9e921ff1-4d9e-49bc-ad01-2ab14cee5ca8?rule=original", "https://static.fotocasa.es/images/ads/f3dba2ab-74a9-4bba-b463-7d1403ef0ada?rule=original", "https://static.fotocasa.es/images/ads/51dafc93-7e5c-41f3-b12f-4c7a1d8c1bc7?rule=original", "https://static.fotocasa.es/images/ads/d5a70080-77a9-43d0-aab4-53fcad465813?rule=original", "https://static.fotocasa.es/images/ads/13c7db45-ea06-46ce-9be9-f7a48e7ebaec?rule=original", "https://static.fotocasa.es/images/ads/da583897-2762-456c-8359-702bb9930883?rule=original", "https://static.fotocasa.es/images/ads/c736322f-60b9-4171-9852-9fec2ea988f7?rule=original", "https://static.fotocasa.es/images/ads/8b6c143b-77cf-46b3-a817-b7dff760a6ed?rule=original", "https://static.fotocasa.es/images/ads/18051e85-856a-4f5b-9d27-293a9bba8ec1?rule=original", "https://static.fotocasa.es/images/ads/54f23c35-9246-4bf1-b9f2-87d1fd2d72dc?rule=original", "https://static.fotocasa.es/images/ads/8e21d398-dd4e-40ea-ad60-497fc5f514bc?rule=original", "https://static.fotocasa.es/images/ads/7ef435b6-fd08-497a-9429-26cf87cb0618?rule=original", "https://static.fotocasa.es/images/ads/add89057-dc1f-49c9-86b2-01e4e42f67a3?rule=original", "https://static.fotocasa.es/images/ads/ef5de743-700d-4c00-acbf-f416bc20a0db?rule=original"];
+    const mainPhoto = document.getElementById("main-photo");
+    const counter = document.getElementById("counter");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let current = 0;
+
+    function show(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      mainPhoto.src = images[current];
+      counter.textContent = `${current + 1}/${images.length}`;
+      thumbs.forEach((thumb, itemIndex) => thumb.classList.toggle("active", itemIndex === current));
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => show(current - 1));
+    document.querySelector(".next").addEventListener("click", () => show(current + 1));
+    thumbs.forEach(thumb => thumb.addEventListener("click", () => show(Number(thumb.dataset.index))));
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://www.fotocasa.es/es/comprar/vivienda/orihuela/parking-terraza-piscina/189105595/d");
+      } catch (error) {
+        window.prompt("Copia el enlace", "https://www.fotocasa.es/es/comprar/vivienda/orihuela/parking-terraza-piscina/189105595/d");
+      }
+    });
+  </script>
+</body>
+</html>

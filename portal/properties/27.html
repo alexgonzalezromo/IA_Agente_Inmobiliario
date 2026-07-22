@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>House_chalet en venta en Calle Calle Tramontana, Cabo Roig</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #667085;
+      --line: #d7dfdc;
+      --accent: #0f766e;
+      --accent-dark: #0a4f49;
+      --good: #137a3f;
+      --bad: #a33b2f;
+      --panel: #fff;
+      --soft: #eef3f1;
+      --warm: #fbf6ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f7f6;
+    }
+    a, button { font: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 18px 20px 54px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back, .external {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 10px 13px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+    .back { background: #18212d; }
+    .external:hover { background: var(--accent-dark); }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+    .gallery, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17, 24, 39, .09);
+    }
+    .stage {
+      position: relative;
+      background: #dbe4e2;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .stage img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+    .counter {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+    }
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 10px;
+      max-height: 230px;
+      overflow: auto;
+    }
+    .thumb {
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      aspect-ratio: 4 / 3;
+    }
+    .thumb.active { border-color: var(--accent); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .panel { padding: 20px; }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 30px; line-height: 1.12; margin: 0 0 10px; letter-spacing: 0; }
+    .location { margin: 0 0 16px; color: var(--muted); }
+    .price { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .delta { font-weight: 900; margin-bottom: 16px; }
+    .delta.below { color: var(--good); }
+    .delta.above { color: var(--bad); }
+    .delta.near { color: var(--accent); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .metrics div {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .metrics strong { display: block; }
+    .metrics span { color: var(--muted); font-size: 13px; }
+    .summary, .description {
+      color: #344054;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .analysis section {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .analysis h2 { font-size: 15px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #344054;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .stage, .stage img { height: 430px; min-height: 430px; }
+    }
+    @media (max-width: 560px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+      .stage, .stage img { height: 300px; min-height: 300px; }
+      .analysis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <a class="back" href="../index.html">Volver al ranking</a>
+      <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-jardin-terraza-trastero-amueblado/190073369/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+    </div>
+    <div class="layout">
+      <section class="gallery">
+        <div class="stage">
+          <button class="nav prev" type="button" aria-label="Foto anterior">&#8249;</button>
+          <img id="main-photo" src="https://static.fotocasa.es/images/ads/77b66b3d-1742-496e-a2ad-e1014ce9c6e8?rule=original" alt="House_chalet en venta en Calle Calle Tramontana, Cabo Roig">
+          <button class="nav next" type="button" aria-label="Foto siguiente">&#8250;</button>
+          <div class="counter" id="counter">1/29</div>
+        </div>
+        <div class="thumbs"><button type="button" class="thumb active" data-index="0"><img src="https://static.fotocasa.es/images/ads/77b66b3d-1742-496e-a2ad-e1014ce9c6e8?rule=original" alt="Foto 1"></button><button type="button" class="thumb" data-index="1"><img src="https://static.fotocasa.es/images/ads/ff5b6268-3f64-4ffa-ab36-5c90c333a83b?rule=original" alt="Foto 2"></button><button type="button" class="thumb" data-index="2"><img src="https://static.fotocasa.es/images/ads/fb1c9db9-656b-4a91-a51b-e7caafb5fa9b?rule=original" alt="Foto 3"></button><button type="button" class="thumb" data-index="3"><img src="https://static.fotocasa.es/images/ads/04094b54-25f2-4e4f-84c3-d5cb5911d7e4?rule=original" alt="Foto 4"></button><button type="button" class="thumb" data-index="4"><img src="https://static.fotocasa.es/images/ads/a1913b6e-8748-4d32-90f4-1ee3630df528?rule=original" alt="Foto 5"></button><button type="button" class="thumb" data-index="5"><img src="https://static.fotocasa.es/images/ads/d75e6731-3014-4918-9839-e2984ab567f2?rule=original" alt="Foto 6"></button><button type="button" class="thumb" data-index="6"><img src="https://static.fotocasa.es/images/ads/f605b3a5-c1f7-4c96-aa71-b56db4d609e7?rule=original" alt="Foto 7"></button><button type="button" class="thumb" data-index="7"><img src="https://static.fotocasa.es/images/ads/ed422479-9d40-4c77-9cf6-7012c5a46f83?rule=original" alt="Foto 8"></button><button type="button" class="thumb" data-index="8"><img src="https://static.fotocasa.es/images/ads/ce91b955-783c-406e-bd18-0bc2d0ca7c52?rule=original" alt="Foto 9"></button><button type="button" class="thumb" data-index="9"><img src="https://static.fotocasa.es/images/ads/b0991ae1-368e-42a3-81da-382ff550a9e9?rule=original" alt="Foto 10"></button><button type="button" class="thumb" data-index="10"><img src="https://static.fotocasa.es/images/ads/020f3d53-9785-407a-8b6a-03575eb0fd2e?rule=original" alt="Foto 11"></button><button type="button" class="thumb" data-index="11"><img src="https://static.fotocasa.es/images/ads/7bc12af0-6fcc-4665-a3b2-c4b48c2e1d15?rule=original" alt="Foto 12"></button><button type="button" class="thumb" data-index="12"><img src="https://static.fotocasa.es/images/ads/dbe64bb3-27c3-49ac-866c-c1e09a63f475?rule=original" alt="Foto 13"></button><button type="button" class="thumb" data-index="13"><img src="https://static.fotocasa.es/images/ads/12190391-4102-4a39-a1e1-a702b7fd0339?rule=original" alt="Foto 14"></button><button type="button" class="thumb" data-index="14"><img src="https://static.fotocasa.es/images/ads/23073653-0bb3-405d-8b1b-4c4ca68e48ec?rule=original" alt="Foto 15"></button><button type="button" class="thumb" data-index="15"><img src="https://static.fotocasa.es/images/ads/ca66666d-ce9e-4c7e-981c-12a71583d133?rule=original" alt="Foto 16"></button><button type="button" class="thumb" data-index="16"><img src="https://static.fotocasa.es/images/ads/5542e50f-ddfb-4ad4-a943-fc5b081ed81c?rule=original" alt="Foto 17"></button><button type="button" class="thumb" data-index="17"><img src="https://static.fotocasa.es/images/ads/f0813133-a744-4503-a455-70bfa098c746?rule=original" alt="Foto 18"></button><button type="button" class="thumb" data-index="18"><img src="https://static.fotocasa.es/images/ads/3d982cd8-78c7-475a-b074-f3313773c4ef?rule=original" alt="Foto 19"></button><button type="button" class="thumb" data-index="19"><img src="https://static.fotocasa.es/images/ads/4a677ac0-e3ce-4bf2-84a9-c740660f84e9?rule=original" alt="Foto 20"></button><button type="button" class="thumb" data-index="20"><img src="https://static.fotocasa.es/images/ads/f8fa50e7-f6f2-4c12-a38f-570450686fb3?rule=original" alt="Foto 21"></button><button type="button" class="thumb" data-index="21"><img src="https://static.fotocasa.es/images/ads/819c4891-a6ef-4fda-b106-b2ec119707a8?rule=original" alt="Foto 22"></button><button type="button" class="thumb" data-index="22"><img src="https://static.fotocasa.es/images/ads/e40b4ad3-0478-41d2-a003-81554c539010?rule=original" alt="Foto 23"></button><button type="button" class="thumb" data-index="23"><img src="https://static.fotocasa.es/images/ads/22d9fa21-1687-47c6-b10c-21520b8f9812?rule=original" alt="Foto 24"></button><button type="button" class="thumb" data-index="24"><img src="https://static.fotocasa.es/images/ads/27e57026-d537-488e-be98-cc7c51393a1f?rule=original" alt="Foto 25"></button><button type="button" class="thumb" data-index="25"><img src="https://static.fotocasa.es/images/ads/8a6ec6ef-28f3-410e-8e77-a80412c1ee75?rule=original" alt="Foto 26"></button><button type="button" class="thumb" data-index="26"><img src="https://static.fotocasa.es/images/ads/ca811182-5504-45db-8c5d-8498a942cee9?rule=original" alt="Foto 27"></button><button type="button" class="thumb" data-index="27"><img src="https://static.fotocasa.es/images/ads/d23b226b-296b-4e50-b0e1-4bee7b259175?rule=original" alt="Foto 28"></button><button type="button" class="thumb" data-index="28"><img src="https://static.fotocasa.es/images/ads/2b256d54-5aa5-4169-b201-cd6f0be2d491?rule=original" alt="Foto 29"></button></div>
+      </section>
+      <aside class="panel">
+        <div class="score">100/100 encaje</div>
+        <h1>House_chalet en venta en Calle Calle Tramontana, Cabo Roig</h1>
+        <p class="location">Calle Calle Tramontana, Cabo Roig</p>
+        <div class="price">330.000 EUR</div>
+        <div class="delta below">-10.014 EUR frente al ML</div>
+        <div class="metrics">
+          <div><strong>4</strong><span>Habitaciones</span></div>
+          <div><strong>3</strong><span>Banos</span></div>
+          <div><strong>100 m2</strong><span>Superficie</span></div>
+          <div><strong>3.300 EUR</strong><span>Precio por m2</span></div>
+        </div>
+        <p class="summary">Precioso chalet adosado tipo dúplex reformado, con orientación sur y ubicado en una tranquila calle residencial de Cabo Roig, a poca distancia a pie del mar.
+
+Esta amplia vivienda cuenta con unos 100 m2 construidos y un jardín privado de aproximadamente 50.</p>
+        <div class="actions">
+          <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-jardin-terraza-trastero-amueblado/190073369/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+          <button class="ghost" type="button" id="copy">Copiar enlace</button>
+        </div>
+      </aside>
+    </div>
+    <section class="analysis">
+      <section>
+        <h2>Por que encaja</h2>
+        <ul><li>Sale por debajo de la estimacion del modelo de precio.</li><li>Tiene al menos dos dormitorios.</li><li>Tiene una superficie interesante para la zona.</li><li>Menciona extras valorables como terraza, piscina, jardin o parking.</li></ul>
+      </section>
+      <section>
+        <h2>Riesgos</h2>
+        <ul><li>Sin riesgos destacados en los datos disponibles.</li></ul>
+      </section>
+    </section>
+    <p class="description">Precioso chalet adosado tipo dúplex reformado, con orientación sur y ubicado en una tranquila calle residencial de Cabo Roig, a poca distancia a pie del mar.
+
+Esta amplia vivienda cuenta con unos 100 m2 construidos y un jardín privado de aproximadamente 50 m2 con barbacoa y horno, ideal para disfrutar del exterior durante todo el año. Forma parte de una comunidad cerrada con plaza de parking y zonas ajardinadas.
+
+Uno de sus puntos más interesantes es su distribución en dos plantas con accesos y espacios que permiten utilizarlas de forma independiente. Añadiendo una cocina en la planta superior, podrían convertirse fácilmente en dos viviendas separadas, lo que la convierte en una opción muy atractiva como inversión: para alquilar una parte y utilizar la otra para vivir o para vacaciones. 
+
+Dispone en total de 4 dormitorios y 3 baños. Distribución:
+
+Planta baja: cocina abierta a un amplio salón-comedor con armario empotrado y trastero, 1 dormitorio y 1 baño completo con ducha.
+
+Planta alta: terraza acristalada con cortinas de cristal y vistas despejadas, salón-comedor con chimenea y aire acondicionado, 3 dormitorios dobles con armarios empotrados y 2 baños completos con ducha.
+
+Aunque la comunidad no tiene piscina, a pocos metros hay una piscina a la que es posible acceder mediante abono.
+
+Una propiedad versátil, amplia, luminosa y bien ubicada, ideal como inversión residencia habitual o para disfrutar de tus vacaciones al lado del mar.</p>
+  </main>
+  <script>
+    const images = ["https://static.fotocasa.es/images/ads/77b66b3d-1742-496e-a2ad-e1014ce9c6e8?rule=original", "https://static.fotocasa.es/images/ads/ff5b6268-3f64-4ffa-ab36-5c90c333a83b?rule=original", "https://static.fotocasa.es/images/ads/fb1c9db9-656b-4a91-a51b-e7caafb5fa9b?rule=original", "https://static.fotocasa.es/images/ads/04094b54-25f2-4e4f-84c3-d5cb5911d7e4?rule=original", "https://static.fotocasa.es/images/ads/a1913b6e-8748-4d32-90f4-1ee3630df528?rule=original", "https://static.fotocasa.es/images/ads/d75e6731-3014-4918-9839-e2984ab567f2?rule=original", "https://static.fotocasa.es/images/ads/f605b3a5-c1f7-4c96-aa71-b56db4d609e7?rule=original", "https://static.fotocasa.es/images/ads/ed422479-9d40-4c77-9cf6-7012c5a46f83?rule=original", "https://static.fotocasa.es/images/ads/ce91b955-783c-406e-bd18-0bc2d0ca7c52?rule=original", "https://static.fotocasa.es/images/ads/b0991ae1-368e-42a3-81da-382ff550a9e9?rule=original", "https://static.fotocasa.es/images/ads/020f3d53-9785-407a-8b6a-03575eb0fd2e?rule=original", "https://static.fotocasa.es/images/ads/7bc12af0-6fcc-4665-a3b2-c4b48c2e1d15?rule=original", "https://static.fotocasa.es/images/ads/dbe64bb3-27c3-49ac-866c-c1e09a63f475?rule=original", "https://static.fotocasa.es/images/ads/12190391-4102-4a39-a1e1-a702b7fd0339?rule=original", "https://static.fotocasa.es/images/ads/23073653-0bb3-405d-8b1b-4c4ca68e48ec?rule=original", "https://static.fotocasa.es/images/ads/ca66666d-ce9e-4c7e-981c-12a71583d133?rule=original", "https://static.fotocasa.es/images/ads/5542e50f-ddfb-4ad4-a943-fc5b081ed81c?rule=original", "https://static.fotocasa.es/images/ads/f0813133-a744-4503-a455-70bfa098c746?rule=original", "https://static.fotocasa.es/images/ads/3d982cd8-78c7-475a-b074-f3313773c4ef?rule=original", "https://static.fotocasa.es/images/ads/4a677ac0-e3ce-4bf2-84a9-c740660f84e9?rule=original", "https://static.fotocasa.es/images/ads/f8fa50e7-f6f2-4c12-a38f-570450686fb3?rule=original", "https://static.fotocasa.es/images/ads/819c4891-a6ef-4fda-b106-b2ec119707a8?rule=original", "https://static.fotocasa.es/images/ads/e40b4ad3-0478-41d2-a003-81554c539010?rule=original", "https://static.fotocasa.es/images/ads/22d9fa21-1687-47c6-b10c-21520b8f9812?rule=original", "https://static.fotocasa.es/images/ads/27e57026-d537-488e-be98-cc7c51393a1f?rule=original", "https://static.fotocasa.es/images/ads/8a6ec6ef-28f3-410e-8e77-a80412c1ee75?rule=original", "https://static.fotocasa.es/images/ads/ca811182-5504-45db-8c5d-8498a942cee9?rule=original", "https://static.fotocasa.es/images/ads/d23b226b-296b-4e50-b0e1-4bee7b259175?rule=original", "https://static.fotocasa.es/images/ads/2b256d54-5aa5-4169-b201-cd6f0be2d491?rule=original"];
+    const mainPhoto = document.getElementById("main-photo");
+    const counter = document.getElementById("counter");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let current = 0;
+
+    function show(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      mainPhoto.src = images[current];
+      counter.textContent = `${current + 1}/${images.length}`;
+      thumbs.forEach((thumb, itemIndex) => thumb.classList.toggle("active", itemIndex === current));
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => show(current - 1));
+    document.querySelector(".next").addEventListener("click", () => show(current + 1));
+    thumbs.forEach(thumb => thumb.addEventListener("click", () => show(Number(thumb.dataset.index))));
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-jardin-terraza-trastero-amueblado/190073369/d");
+      } catch (error) {
+        window.prompt("Copia el enlace", "https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-jardin-terraza-trastero-amueblado/190073369/d");
+      }
+    });
+  </script>
+</body>
+</html>

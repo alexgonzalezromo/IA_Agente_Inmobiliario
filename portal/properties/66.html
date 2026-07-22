@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Piso en venta en Miguel de Unamuno s/n, Campoamor</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #667085;
+      --line: #d7dfdc;
+      --accent: #0f766e;
+      --accent-dark: #0a4f49;
+      --good: #137a3f;
+      --bad: #a33b2f;
+      --panel: #fff;
+      --soft: #eef3f1;
+      --warm: #fbf6ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f7f6;
+    }
+    a, button { font: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 18px 20px 54px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back, .external {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 10px 13px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+    .back { background: #18212d; }
+    .external:hover { background: var(--accent-dark); }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+    .gallery, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17, 24, 39, .09);
+    }
+    .stage {
+      position: relative;
+      background: #dbe4e2;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .stage img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+    .counter {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+    }
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 10px;
+      max-height: 230px;
+      overflow: auto;
+    }
+    .thumb {
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      aspect-ratio: 4 / 3;
+    }
+    .thumb.active { border-color: var(--accent); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .panel { padding: 20px; }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 30px; line-height: 1.12; margin: 0 0 10px; letter-spacing: 0; }
+    .location { margin: 0 0 16px; color: var(--muted); }
+    .price { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .delta { font-weight: 900; margin-bottom: 16px; }
+    .delta.below { color: var(--good); }
+    .delta.above { color: var(--bad); }
+    .delta.near { color: var(--accent); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .metrics div {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .metrics strong { display: block; }
+    .metrics span { color: var(--muted); font-size: 13px; }
+    .summary, .description {
+      color: #344054;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .analysis section {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .analysis h2 { font-size: 15px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #344054;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .stage, .stage img { height: 430px; min-height: 430px; }
+    }
+    @media (max-width: 560px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+      .stage, .stage img { height: 300px; min-height: 300px; }
+      .analysis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <a class="back" href="../index.html">Volver al ranking</a>
+      <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-terraza-trastero-ascensor-piscina-amueblado/185439274/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+    </div>
+    <div class="layout">
+      <section class="gallery">
+        <div class="stage">
+          <button class="nav prev" type="button" aria-label="Foto anterior">&#8249;</button>
+          <img id="main-photo" src="https://static.fotocasa.es/images/ads/0281c981-d06e-4463-9ab0-2adbded8cc1e?rule=original" alt="Piso en venta en Miguel de Unamuno s/n, Campoamor">
+          <button class="nav next" type="button" aria-label="Foto siguiente">&#8250;</button>
+          <div class="counter" id="counter">1/32</div>
+        </div>
+        <div class="thumbs"><button type="button" class="thumb active" data-index="0"><img src="https://static.fotocasa.es/images/ads/0281c981-d06e-4463-9ab0-2adbded8cc1e?rule=original" alt="Foto 1"></button><button type="button" class="thumb" data-index="1"><img src="https://static.fotocasa.es/images/ads/dd71ef89-291f-45a9-93fb-268841261969?rule=original" alt="Foto 2"></button><button type="button" class="thumb" data-index="2"><img src="https://static.fotocasa.es/images/ads/ade33f42-bdfb-4567-8644-d2774e6a6c9d?rule=original" alt="Foto 3"></button><button type="button" class="thumb" data-index="3"><img src="https://static.fotocasa.es/images/ads/a8ed662c-2f84-4d3b-b951-499c73387108?rule=original" alt="Foto 4"></button><button type="button" class="thumb" data-index="4"><img src="https://static.fotocasa.es/images/ads/1b1b6355-6fd0-4cf6-9019-319afaa3e584?rule=original" alt="Foto 5"></button><button type="button" class="thumb" data-index="5"><img src="https://static.fotocasa.es/images/ads/4e0ac0e3-f19b-4ae8-b7f7-fdc3b11970b3?rule=original" alt="Foto 6"></button><button type="button" class="thumb" data-index="6"><img src="https://static.fotocasa.es/images/ads/731f0a6d-7022-4c61-8573-65a60f170dca?rule=original" alt="Foto 7"></button><button type="button" class="thumb" data-index="7"><img src="https://static.fotocasa.es/images/ads/5364f909-67f8-49ea-b0a8-88a4fbe5e4eb?rule=original" alt="Foto 8"></button><button type="button" class="thumb" data-index="8"><img src="https://static.fotocasa.es/images/ads/64144b52-447a-4c08-a4b0-8c0b5b0f2723?rule=original" alt="Foto 9"></button><button type="button" class="thumb" data-index="9"><img src="https://static.fotocasa.es/images/ads/c890b7e2-6452-484b-8844-a385f504c75c?rule=original" alt="Foto 10"></button><button type="button" class="thumb" data-index="10"><img src="https://static.fotocasa.es/images/ads/6ab6b021-ed3c-4a28-9bf3-0bed0b987e81?rule=original" alt="Foto 11"></button><button type="button" class="thumb" data-index="11"><img src="https://static.fotocasa.es/images/ads/3dec7d67-62d6-4729-afcd-5672819d9b9e?rule=original" alt="Foto 12"></button><button type="button" class="thumb" data-index="12"><img src="https://static.fotocasa.es/images/ads/85321dae-dce0-4cd0-8531-2a13bbd3e196?rule=original" alt="Foto 13"></button><button type="button" class="thumb" data-index="13"><img src="https://static.fotocasa.es/images/ads/9c7fe2d0-bed1-4a1f-83f0-aab2e8354e35?rule=original" alt="Foto 14"></button><button type="button" class="thumb" data-index="14"><img src="https://static.fotocasa.es/images/ads/9bb5b922-33a5-4b32-9c74-831141d71d47?rule=original" alt="Foto 15"></button><button type="button" class="thumb" data-index="15"><img src="https://static.fotocasa.es/images/ads/12b7802c-a958-4721-81e1-60620cf6d6c3?rule=original" alt="Foto 16"></button><button type="button" class="thumb" data-index="16"><img src="https://static.fotocasa.es/images/ads/e90a8d7a-0766-4215-b697-5ea38a0cbc6f?rule=original" alt="Foto 17"></button><button type="button" class="thumb" data-index="17"><img src="https://static.fotocasa.es/images/ads/597cf576-a7df-4e04-a562-99b0eb4dddcf?rule=original" alt="Foto 18"></button><button type="button" class="thumb" data-index="18"><img src="https://static.fotocasa.es/images/ads/874f0d30-beb7-46a2-83ea-b2787607c2b4?rule=original" alt="Foto 19"></button><button type="button" class="thumb" data-index="19"><img src="https://static.fotocasa.es/images/ads/42ecd040-141e-4450-9141-06129504c3a2?rule=original" alt="Foto 20"></button><button type="button" class="thumb" data-index="20"><img src="https://static.fotocasa.es/images/ads/2ee57f78-9f62-4bfb-b1ff-c90a0c1e8c7e?rule=original" alt="Foto 21"></button><button type="button" class="thumb" data-index="21"><img src="https://static.fotocasa.es/images/ads/b3984d9d-c3e6-4e27-a4ce-263178d4a3de?rule=original" alt="Foto 22"></button><button type="button" class="thumb" data-index="22"><img src="https://static.fotocasa.es/images/ads/c8edd63d-d866-4a92-8deb-bc51c40abe03?rule=original" alt="Foto 23"></button><button type="button" class="thumb" data-index="23"><img src="https://static.fotocasa.es/images/ads/fb8d7370-9733-4dc8-b9c3-5ee98301438b?rule=original" alt="Foto 24"></button><button type="button" class="thumb" data-index="24"><img src="https://static.fotocasa.es/images/ads/501ce0be-c3bb-4eb3-a003-797caf07d008?rule=original" alt="Foto 25"></button><button type="button" class="thumb" data-index="25"><img src="https://static.fotocasa.es/images/ads/b6d68cd9-b949-4096-b61b-34c2f6593895?rule=original" alt="Foto 26"></button><button type="button" class="thumb" data-index="26"><img src="https://static.fotocasa.es/images/ads/132b987c-916d-4476-b729-933b6fdce281?rule=original" alt="Foto 27"></button><button type="button" class="thumb" data-index="27"><img src="https://static.fotocasa.es/images/ads/3e43431b-b61c-4861-be43-340d90757f88?rule=original" alt="Foto 28"></button><button type="button" class="thumb" data-index="28"><img src="https://static.fotocasa.es/images/ads/9e92cc93-6f38-49b3-a95b-2036a89e21f3?rule=original" alt="Foto 29"></button><button type="button" class="thumb" data-index="29"><img src="https://static.fotocasa.es/images/ads/e2806291-c484-4e73-b33f-8b1d4c6ce3ef?rule=original" alt="Foto 30"></button><button type="button" class="thumb" data-index="30"><img src="https://static.fotocasa.es/images/ads/dae7dc62-ec62-40d9-be4f-5703bcab2015?rule=original" alt="Foto 31"></button><button type="button" class="thumb" data-index="31"><img src="https://static.fotocasa.es/images/ads/0d9fccaa-633e-424b-babc-bc4b741a20c9?rule=original" alt="Foto 32"></button></div>
+      </section>
+      <aside class="panel">
+        <div class="score">100/100 encaje</div>
+        <h1>Piso en venta en Miguel de Unamuno s/n, Campoamor</h1>
+        <p class="location">Miguel de Unamuno s/n, Campoamor</p>
+        <div class="price">266.000 EUR</div>
+        <div class="delta below">-771 EUR frente al ML</div>
+        <div class="metrics">
+          <div><strong>2</strong><span>Habitaciones</span></div>
+          <div><strong>2</strong><span>Banos</span></div>
+          <div><strong>107 m2</strong><span>Superficie</span></div>
+          <div><strong>2.485 EUR</strong><span>Precio por m2</span></div>
+        </div>
+        <p class="summary">Grupo mariatomasa te ofrece la oportunidad de adquirir magnífico puso en una de las zonas más exclusivas de la costa mediterránea: Orihuela Costa.
+
+Auténtico lujo integrado con el mediterráneo y sus magníficas playas, con maravillosas vistas a esos.</p>
+        <div class="actions">
+          <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-terraza-trastero-ascensor-piscina-amueblado/185439274/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+          <button class="ghost" type="button" id="copy">Copiar enlace</button>
+        </div>
+      </aside>
+    </div>
+    <section class="analysis">
+      <section>
+        <h2>Por que encaja</h2>
+        <ul><li>Sale por debajo de la estimacion del modelo de precio.</li><li>Tiene al menos dos dormitorios.</li><li>Tiene una superficie interesante para la zona.</li><li>Menciona extras valorables como terraza, piscina, jardin o parking.</li></ul>
+      </section>
+      <section>
+        <h2>Riesgos</h2>
+        <ul><li>Sin riesgos destacados en los datos disponibles.</li></ul>
+      </section>
+    </section>
+    <p class="description">Grupo mariatomasa te ofrece la oportunidad de adquirir magnífico puso en una de las zonas más exclusivas de la costa mediterránea: Orihuela Costa.
+
+Auténtico lujo integrado con el mediterráneo y sus magníficas playas, con maravillosas vistas a esos atardeceres mágicos que sólo podemos disfrutar en nuestras costas, desde un complejo privado dotado de todas las comodidades y lujos que puedas imaginar y disfrutar. Piscina climatizada y exterior, zona multidisciplinar deportiva, zonas infantiles con proyecto arqueológico (donde los más pequeños podrán aprender jugando), con todo lujo de detalles y opciones... y a escasos metros de la playa.
+
+El inmueble aúna comodidad y nuevas tecnologías con amplitud y luz en cada rincón del mismo. Sus dos habitaciones, en las que se ha cuidado hasta el más mínimo detalle, están inundadas de luz natural y dotadas de convenientes armarios empotrados. Resalta la habitación en suite, en la que el baño completo no dejará indiferente a nadie, aunque en el segundo baño también se han cuidado todos los detalles que podamos imaginar; y tenemos la cocina totalmente equipada y diseñada para una gran comodidad de uso. Destaca, por fin, , sobre las demás estancias el salón amplio y luminoso con una magnífica terraza en la que disfrutar de cada puesta de sol.</p>
+  </main>
+  <script>
+    const images = ["https://static.fotocasa.es/images/ads/0281c981-d06e-4463-9ab0-2adbded8cc1e?rule=original", "https://static.fotocasa.es/images/ads/dd71ef89-291f-45a9-93fb-268841261969?rule=original", "https://static.fotocasa.es/images/ads/ade33f42-bdfb-4567-8644-d2774e6a6c9d?rule=original", "https://static.fotocasa.es/images/ads/a8ed662c-2f84-4d3b-b951-499c73387108?rule=original", "https://static.fotocasa.es/images/ads/1b1b6355-6fd0-4cf6-9019-319afaa3e584?rule=original", "https://static.fotocasa.es/images/ads/4e0ac0e3-f19b-4ae8-b7f7-fdc3b11970b3?rule=original", "https://static.fotocasa.es/images/ads/731f0a6d-7022-4c61-8573-65a60f170dca?rule=original", "https://static.fotocasa.es/images/ads/5364f909-67f8-49ea-b0a8-88a4fbe5e4eb?rule=original", "https://static.fotocasa.es/images/ads/64144b52-447a-4c08-a4b0-8c0b5b0f2723?rule=original", "https://static.fotocasa.es/images/ads/c890b7e2-6452-484b-8844-a385f504c75c?rule=original", "https://static.fotocasa.es/images/ads/6ab6b021-ed3c-4a28-9bf3-0bed0b987e81?rule=original", "https://static.fotocasa.es/images/ads/3dec7d67-62d6-4729-afcd-5672819d9b9e?rule=original", "https://static.fotocasa.es/images/ads/85321dae-dce0-4cd0-8531-2a13bbd3e196?rule=original", "https://static.fotocasa.es/images/ads/9c7fe2d0-bed1-4a1f-83f0-aab2e8354e35?rule=original", "https://static.fotocasa.es/images/ads/9bb5b922-33a5-4b32-9c74-831141d71d47?rule=original", "https://static.fotocasa.es/images/ads/12b7802c-a958-4721-81e1-60620cf6d6c3?rule=original", "https://static.fotocasa.es/images/ads/e90a8d7a-0766-4215-b697-5ea38a0cbc6f?rule=original", "https://static.fotocasa.es/images/ads/597cf576-a7df-4e04-a562-99b0eb4dddcf?rule=original", "https://static.fotocasa.es/images/ads/874f0d30-beb7-46a2-83ea-b2787607c2b4?rule=original", "https://static.fotocasa.es/images/ads/42ecd040-141e-4450-9141-06129504c3a2?rule=original", "https://static.fotocasa.es/images/ads/2ee57f78-9f62-4bfb-b1ff-c90a0c1e8c7e?rule=original", "https://static.fotocasa.es/images/ads/b3984d9d-c3e6-4e27-a4ce-263178d4a3de?rule=original", "https://static.fotocasa.es/images/ads/c8edd63d-d866-4a92-8deb-bc51c40abe03?rule=original", "https://static.fotocasa.es/images/ads/fb8d7370-9733-4dc8-b9c3-5ee98301438b?rule=original", "https://static.fotocasa.es/images/ads/501ce0be-c3bb-4eb3-a003-797caf07d008?rule=original", "https://static.fotocasa.es/images/ads/b6d68cd9-b949-4096-b61b-34c2f6593895?rule=original", "https://static.fotocasa.es/images/ads/132b987c-916d-4476-b729-933b6fdce281?rule=original", "https://static.fotocasa.es/images/ads/3e43431b-b61c-4861-be43-340d90757f88?rule=original", "https://static.fotocasa.es/images/ads/9e92cc93-6f38-49b3-a95b-2036a89e21f3?rule=original", "https://static.fotocasa.es/images/ads/e2806291-c484-4e73-b33f-8b1d4c6ce3ef?rule=original", "https://static.fotocasa.es/images/ads/dae7dc62-ec62-40d9-be4f-5703bcab2015?rule=original", "https://static.fotocasa.es/images/ads/0d9fccaa-633e-424b-babc-bc4b741a20c9?rule=original"];
+    const mainPhoto = document.getElementById("main-photo");
+    const counter = document.getElementById("counter");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let current = 0;
+
+    function show(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      mainPhoto.src = images[current];
+      counter.textContent = `${current + 1}/${images.length}`;
+      thumbs.forEach((thumb, itemIndex) => thumb.classList.toggle("active", itemIndex === current));
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => show(current - 1));
+    document.querySelector(".next").addEventListener("click", () => show(current + 1));
+    thumbs.forEach(thumb => thumb.addEventListener("click", () => show(Number(thumb.dataset.index))));
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-terraza-trastero-ascensor-piscina-amueblado/185439274/d");
+      } catch (error) {
+        window.prompt("Copia el enlace", "https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-terraza-trastero-ascensor-piscina-amueblado/185439274/d");
+      }
+    });
+  </script>
+</body>
+</html>

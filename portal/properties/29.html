@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>House_chalet en venta en Ronda Ronda Garcilaso de la Vega-Campoamor, 8, Campoamor</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #667085;
+      --line: #d7dfdc;
+      --accent: #0f766e;
+      --accent-dark: #0a4f49;
+      --good: #137a3f;
+      --bad: #a33b2f;
+      --panel: #fff;
+      --soft: #eef3f1;
+      --warm: #fbf6ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f7f6;
+    }
+    a, button { font: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 18px 20px 54px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back, .external {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 10px 13px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+    .back { background: #18212d; }
+    .external:hover { background: var(--accent-dark); }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+    .gallery, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17, 24, 39, .09);
+    }
+    .stage {
+      position: relative;
+      background: #dbe4e2;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .stage img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+    .counter {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+    }
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 10px;
+      max-height: 230px;
+      overflow: auto;
+    }
+    .thumb {
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      aspect-ratio: 4 / 3;
+    }
+    .thumb.active { border-color: var(--accent); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .panel { padding: 20px; }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 30px; line-height: 1.12; margin: 0 0 10px; letter-spacing: 0; }
+    .location { margin: 0 0 16px; color: var(--muted); }
+    .price { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .delta { font-weight: 900; margin-bottom: 16px; }
+    .delta.below { color: var(--good); }
+    .delta.above { color: var(--bad); }
+    .delta.near { color: var(--accent); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .metrics div {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .metrics strong { display: block; }
+    .metrics span { color: var(--muted); font-size: 13px; }
+    .summary, .description {
+      color: #344054;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .analysis section {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .analysis h2 { font-size: 15px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #344054;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .stage, .stage img { height: 430px; min-height: 430px; }
+    }
+    @media (max-width: 560px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+      .stage, .stage img { height: 300px; min-height: 300px; }
+      .analysis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <a class="back" href="../index.html">Volver al ranking</a>
+      <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-jardin-terraza-trastero-patio-amueblado-piscina/189781818/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+    </div>
+    <div class="layout">
+      <section class="gallery">
+        <div class="stage">
+          <button class="nav prev" type="button" aria-label="Foto anterior">&#8249;</button>
+          <img id="main-photo" src="https://static.fotocasa.es/images/ads/d372f3c2-82c3-47ec-ae89-0e6bc95c8773?rule=original" alt="House_chalet en venta en Ronda Ronda Garcilaso de la Vega-Campoamor, 8, Campoamor">
+          <button class="nav next" type="button" aria-label="Foto siguiente">&#8250;</button>
+          <div class="counter" id="counter">1/60</div>
+        </div>
+        <div class="thumbs"><button type="button" class="thumb active" data-index="0"><img src="https://static.fotocasa.es/images/ads/d372f3c2-82c3-47ec-ae89-0e6bc95c8773?rule=original" alt="Foto 1"></button><button type="button" class="thumb" data-index="1"><img src="https://static.fotocasa.es/images/ads/2ac62e5c-71b5-4381-b4eb-696647ca33cf?rule=original" alt="Foto 2"></button><button type="button" class="thumb" data-index="2"><img src="https://static.fotocasa.es/images/ads/af67b2b9-1e55-43a1-98f7-ce66830f5359?rule=original" alt="Foto 3"></button><button type="button" class="thumb" data-index="3"><img src="https://static.fotocasa.es/images/ads/93c75f2b-b57d-46b4-af8a-a947dc59e967?rule=original" alt="Foto 4"></button><button type="button" class="thumb" data-index="4"><img src="https://static.fotocasa.es/images/ads/b87562dd-0f82-4abd-8e24-62ac88d2b6db?rule=original" alt="Foto 5"></button><button type="button" class="thumb" data-index="5"><img src="https://static.fotocasa.es/images/ads/232b2c20-9957-47cd-8b45-71c2d5113606?rule=original" alt="Foto 6"></button><button type="button" class="thumb" data-index="6"><img src="https://static.fotocasa.es/images/ads/0afc9f98-8690-4ded-9b2b-748a196da36b?rule=original" alt="Foto 7"></button><button type="button" class="thumb" data-index="7"><img src="https://static.fotocasa.es/images/ads/fa918140-6265-4dfc-96bc-1aaf14f303fb?rule=original" alt="Foto 8"></button><button type="button" class="thumb" data-index="8"><img src="https://static.fotocasa.es/images/ads/82056f81-005b-430a-893c-40ea1aee842a?rule=original" alt="Foto 9"></button><button type="button" class="thumb" data-index="9"><img src="https://static.fotocasa.es/images/ads/fa002655-81dc-4fc3-adbf-70ffe83a40f8?rule=original" alt="Foto 10"></button><button type="button" class="thumb" data-index="10"><img src="https://static.fotocasa.es/images/ads/5cf3eb74-aed6-49f8-88ed-bad6550041b6?rule=original" alt="Foto 11"></button><button type="button" class="thumb" data-index="11"><img src="https://static.fotocasa.es/images/ads/9af7dd94-2f82-41ce-ae06-33d570dc26e9?rule=original" alt="Foto 12"></button><button type="button" class="thumb" data-index="12"><img src="https://static.fotocasa.es/images/ads/72b23822-6d3b-4016-b2e3-da802a92fd76?rule=original" alt="Foto 13"></button><button type="button" class="thumb" data-index="13"><img src="https://static.fotocasa.es/images/ads/ee2ccae9-7c30-4177-bb42-03bb9609a065?rule=original" alt="Foto 14"></button><button type="button" class="thumb" data-index="14"><img src="https://static.fotocasa.es/images/ads/f0b1f283-744d-4323-87d8-4a72216bbd5f?rule=original" alt="Foto 15"></button><button type="button" class="thumb" data-index="15"><img src="https://static.fotocasa.es/images/ads/431750b4-be07-4a00-a33b-9013e7cce0bb?rule=original" alt="Foto 16"></button><button type="button" class="thumb" data-index="16"><img src="https://static.fotocasa.es/images/ads/155fb81b-a807-4c2b-825f-5d9a38c89847?rule=original" alt="Foto 17"></button><button type="button" class="thumb" data-index="17"><img src="https://static.fotocasa.es/images/ads/c28c1333-7de7-476d-ac71-723574709664?rule=original" alt="Foto 18"></button><button type="button" class="thumb" data-index="18"><img src="https://static.fotocasa.es/images/ads/46e8a125-4c09-4d15-b277-45dc4dc2da7f?rule=original" alt="Foto 19"></button><button type="button" class="thumb" data-index="19"><img src="https://static.fotocasa.es/images/ads/c943f2db-30d7-4360-ad46-11965d0a1408?rule=original" alt="Foto 20"></button><button type="button" class="thumb" data-index="20"><img src="https://static.fotocasa.es/images/ads/140aa934-f037-4778-b2e3-78ebb83e0c45?rule=original" alt="Foto 21"></button><button type="button" class="thumb" data-index="21"><img src="https://static.fotocasa.es/images/ads/dbbb7508-6dc6-44a8-afd1-00bbbaf96e5f?rule=original" alt="Foto 22"></button><button type="button" class="thumb" data-index="22"><img src="https://static.fotocasa.es/images/ads/eed290f0-5f48-4649-9df1-b9fe3d018dd2?rule=original" alt="Foto 23"></button><button type="button" class="thumb" data-index="23"><img src="https://static.fotocasa.es/images/ads/b51df9cf-9e17-46c0-bafd-e54486c2f0e5?rule=original" alt="Foto 24"></button><button type="button" class="thumb" data-index="24"><img src="https://static.fotocasa.es/images/ads/acb71be9-9d89-4ce5-b369-1524940c9539?rule=original" alt="Foto 25"></button><button type="button" class="thumb" data-index="25"><img src="https://static.fotocasa.es/images/ads/5c5f06db-631a-48ff-8e9c-924b5e2fa75f?rule=original" alt="Foto 26"></button><button type="button" class="thumb" data-index="26"><img src="https://static.fotocasa.es/images/ads/ecd7e51d-eb75-41cc-a97e-c875653f8512?rule=original" alt="Foto 27"></button><button type="button" class="thumb" data-index="27"><img src="https://static.fotocasa.es/images/ads/d6edeb0a-7e7e-4f82-bf89-e19f2515af99?rule=original" alt="Foto 28"></button><button type="button" class="thumb" data-index="28"><img src="https://static.fotocasa.es/images/ads/9071e5be-8946-4de3-8c27-98203b1c46dc?rule=original" alt="Foto 29"></button><button type="button" class="thumb" data-index="29"><img src="https://static.fotocasa.es/images/ads/9484a520-20e7-47f5-a4db-238cdb70c669?rule=original" alt="Foto 30"></button><button type="button" class="thumb" data-index="30"><img src="https://static.fotocasa.es/images/ads/87eb0e74-cdc6-427a-963f-c41ed822807e?rule=original" alt="Foto 31"></button><button type="button" class="thumb" data-index="31"><img src="https://static.fotocasa.es/images/ads/16cf11e3-587b-44b4-9508-18a579186dc9?rule=original" alt="Foto 32"></button><button type="button" class="thumb" data-index="32"><img src="https://static.fotocasa.es/images/ads/ccbc5a39-7220-49c2-b193-4f5a64675755?rule=original" alt="Foto 33"></button><button type="button" class="thumb" data-index="33"><img src="https://static.fotocasa.es/images/ads/1657f228-65a1-4572-98b4-e67d1b6f13f7?rule=original" alt="Foto 34"></button><button type="button" class="thumb" data-index="34"><img src="https://static.fotocasa.es/images/ads/c7420507-8a1a-4a1a-9518-c1057844cabd?rule=original" alt="Foto 35"></button><button type="button" class="thumb" data-index="35"><img src="https://static.fotocasa.es/images/ads/81ccfc8a-ec1d-4181-ad7f-cc31c29a09b6?rule=original" alt="Foto 36"></button><button type="button" class="thumb" data-index="36"><img src="https://static.fotocasa.es/images/ads/e145ff44-5033-4f08-b457-2f472223b78c?rule=original" alt="Foto 37"></button><button type="button" class="thumb" data-index="37"><img src="https://static.fotocasa.es/images/ads/64c8b053-5d77-4b2e-be61-5f2a1ed3420c?rule=original" alt="Foto 38"></button><button type="button" class="thumb" data-index="38"><img src="https://static.fotocasa.es/images/ads/da2417aa-d9ca-41c5-be31-e52c0d46b948?rule=original" alt="Foto 39"></button><button type="button" class="thumb" data-index="39"><img src="https://static.fotocasa.es/images/ads/9bec58c6-094c-4b6a-aada-5805d4805bc6?rule=original" alt="Foto 40"></button><button type="button" class="thumb" data-index="40"><img src="https://static.fotocasa.es/images/ads/14004a95-4421-418a-a8e8-3795b14f2e4c?rule=original" alt="Foto 41"></button><button type="button" class="thumb" data-index="41"><img src="https://static.fotocasa.es/images/ads/4d6d3cfc-2838-4978-9608-a4e7f4e43053?rule=original" alt="Foto 42"></button><button type="button" class="thumb" data-index="42"><img src="https://static.fotocasa.es/images/ads/72a1d044-94da-40db-a771-2407a6f259d2?rule=original" alt="Foto 43"></button><button type="button" class="thumb" data-index="43"><img src="https://static.fotocasa.es/images/ads/a2021097-397e-4bcd-b308-84701aea7f84?rule=original" alt="Foto 44"></button><button type="button" class="thumb" data-index="44"><img src="https://static.fotocasa.es/images/ads/73fe6ae9-f231-4df6-8cfd-a45605615a9e?rule=original" alt="Foto 45"></button><button type="button" class="thumb" data-index="45"><img src="https://static.fotocasa.es/images/ads/38e56020-8466-4953-9f75-abd4bf777646?rule=original" alt="Foto 46"></button><button type="button" class="thumb" data-index="46"><img src="https://static.fotocasa.es/images/ads/8772b8fc-2215-4281-a18a-abbefffa8e8d?rule=original" alt="Foto 47"></button><button type="button" class="thumb" data-index="47"><img src="https://static.fotocasa.es/images/ads/906c22ce-b94d-4ae0-bca9-95107c090370?rule=original" alt="Foto 48"></button><button type="button" class="thumb" data-index="48"><img src="https://static.fotocasa.es/images/ads/b7834292-a8d5-4925-a9ee-0c62dfaef3af?rule=original" alt="Foto 49"></button><button type="button" class="thumb" data-index="49"><img src="https://static.fotocasa.es/images/ads/b0c5070d-4984-4c47-b2cf-47e903c24df4?rule=original" alt="Foto 50"></button><button type="button" class="thumb" data-index="50"><img src="https://static.fotocasa.es/images/ads/8842d3a7-eca2-4a67-9645-be6a90731197?rule=original" alt="Foto 51"></button><button type="button" class="thumb" data-index="51"><img src="https://static.fotocasa.es/images/ads/dfe60f2b-3d52-49c6-935c-f93d04b82fc5?rule=original" alt="Foto 52"></button><button type="button" class="thumb" data-index="52"><img src="https://static.fotocasa.es/images/ads/c918480d-9ea4-4819-960a-24de026f1629?rule=original" alt="Foto 53"></button><button type="button" class="thumb" data-index="53"><img src="https://static.fotocasa.es/images/ads/a6476d8a-bf41-4b18-b3ce-e735733aa68f?rule=original" alt="Foto 54"></button><button type="button" class="thumb" data-index="54"><img src="https://static.fotocasa.es/images/ads/f9162236-27bb-46ed-8e28-ef87d3191121?rule=original" alt="Foto 55"></button><button type="button" class="thumb" data-index="55"><img src="https://static.fotocasa.es/images/ads/ea7950b7-c94a-4020-88dd-6406f6f9ab5b?rule=original" alt="Foto 56"></button><button type="button" class="thumb" data-index="56"><img src="https://static.fotocasa.es/images/ads/d9235b04-efa4-4c63-9d46-7abbfe4ea597?rule=original" alt="Foto 57"></button><button type="button" class="thumb" data-index="57"><img src="https://static.fotocasa.es/images/ads/edacabd0-e758-4a63-8596-d6f0b459eb80?rule=original" alt="Foto 58"></button><button type="button" class="thumb" data-index="58"><img src="https://static.fotocasa.es/images/ads/b0757c30-873d-4b63-9355-c65d30bf963e?rule=original" alt="Foto 59"></button><button type="button" class="thumb" data-index="59"><img src="https://static.fotocasa.es/images/ads/4edfd9a5-b204-477e-9076-e064c6ef0e10?rule=original" alt="Foto 60"></button></div>
+      </section>
+      <aside class="panel">
+        <div class="score">100/100 encaje</div>
+        <h1>House_chalet en venta en Ronda Ronda Garcilaso de la Vega-Campoamor, 8, Campoamor</h1>
+        <p class="location">Ronda Ronda Garcilaso de la Vega-Campoamor, 8, Campoamor</p>
+        <div class="price">349.000 EUR</div>
+        <div class="delta above">+37.694 EUR frente al ML</div>
+        <div class="metrics">
+          <div><strong>3</strong><span>Habitaciones</span></div>
+          <div><strong>2</strong><span>Banos</span></div>
+          <div><strong>132 m2</strong><span>Superficie</span></div>
+          <div><strong>2.643 EUR</strong><span>Precio por m2</span></div>
+        </div>
+        <p class="summary">Exclusivo Mini Chalet Planta Baja con amplío jardin en zona de las Villas !
+
+Le presentamos este precioso Chalet todo en planta baja con amplío jardin con acceso a piscinas comunitarias y zonas deportivas en en una de las zonas mas demandadas de.</p>
+        <div class="actions">
+          <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-jardin-terraza-trastero-patio-amueblado-piscina/189781818/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+          <button class="ghost" type="button" id="copy">Copiar enlace</button>
+        </div>
+      </aside>
+    </div>
+    <section class="analysis">
+      <section>
+        <h2>Por que encaja</h2>
+        <ul><li>Tiene al menos dos dormitorios.</li><li>Tiene una superficie interesante para la zona.</li><li>Menciona extras valorables como terraza, piscina, jardin o parking.</li></ul>
+      </section>
+      <section>
+        <h2>Riesgos</h2>
+        <ul><li>El precio esta por encima de la estimacion del modelo.</li></ul>
+      </section>
+    </section>
+    <p class="description">Exclusivo Mini Chalet Planta Baja con amplío jardin en zona de las Villas !
+
+Le presentamos este precioso Chalet todo en planta baja con amplío jardin con acceso a piscinas comunitarias y zonas deportivas en en una de las zonas mas demandadas de Campoamor.
+
+! Una vivienda totalmente equipada y amueblada en perfecto estado para llegar con las maletas y listo!
+
+DISTRIBUCION:
+Zona exterior terraza o jardín ideal para tomar el sol, disfrutar desde las mañanas en el desayuno, el almuerzo o de las cenas disfrutando de el aire puro
+y el clima mediterraneo, disfrutar de las noches de verano, recibir invitados con zona para barbacoa y con espacio suficiente para instalar una piscina.
+
+La vivienda fue reformada intergralmente hace unos 10 años, por lo que actualmente sería un lienzo en blanco para adecuar y personalizar a tu gusto !!
+
+DISTRIBUCION: 
+Entrando amplía zona exterior de jardin y terrazas exteriores que recorren toda la vivienda, también en un ala exterior tenemos zona de trastero y lavanderia.  
+ 
+Amplío salón salon comedor con grandes ventanales que inundan la vivienda de luz natural, cocina abierta totalmente equipada y con zona de isla. 
+
+La cocina independiente, es independiente y esta totalmente equipada con electrodomesticos, desde donde accedemos a una zona exterio de galeria o zona de despensa y lavanderia.
+
+Tres dormitorios y el principal de gran tamaño, todos con armarios empotrados y mucha luz exterior natural
+
+Aire acondicionado en split en salon y dormitorios y un sin fin de detalles que no te dejaran indiferente. 
+
+Dos baños completos equipados con pie de ducha. 
+
+VIVIENDA TODO EXTERIOR, MUY LUMINOSA, LUZ NATURAL Y CON DOS ORIENTACIONES SUR-ESTE 
+
+BENEFICIOS DE LA ZONA:
+Zona residencial muy tranquila y demandada, con vecindario muy agradable y seguridad 24h. 
+
+Acceso directo a la zona de las villas donde disfrutar de las piscinas comunitarias y zonas deportivas. 
+
+El precio del inmueble No incluye los siguientes Gastos e Impuestos de la compraventa que serán a cargo del comprador: Impuesto de Transmisiones Patrimoniales (ITP). Gastos de Notaría y Registro. Honorarios de agencia. Si nos lo solicitan, estaremos encantados de hacerle un presupuesto completo adaptado a sus características personales.
+
+Si has llegado hasta aqui y te gusta, Hablamos del precio ??????????
+
+Mejor que te lo contemos contacta con nosotros por tlf o washap al  6 2 3 6 1 5 2 0 3 y queda para venir a visitarlo!
+
+¡Estamos aquí para ayudarte a encontrar tu vivienda! ¡Te esperamos!</p>
+  </main>
+  <script>
+    const images = ["https://static.fotocasa.es/images/ads/d372f3c2-82c3-47ec-ae89-0e6bc95c8773?rule=original", "https://static.fotocasa.es/images/ads/2ac62e5c-71b5-4381-b4eb-696647ca33cf?rule=original", "https://static.fotocasa.es/images/ads/af67b2b9-1e55-43a1-98f7-ce66830f5359?rule=original", "https://static.fotocasa.es/images/ads/93c75f2b-b57d-46b4-af8a-a947dc59e967?rule=original", "https://static.fotocasa.es/images/ads/b87562dd-0f82-4abd-8e24-62ac88d2b6db?rule=original", "https://static.fotocasa.es/images/ads/232b2c20-9957-47cd-8b45-71c2d5113606?rule=original", "https://static.fotocasa.es/images/ads/0afc9f98-8690-4ded-9b2b-748a196da36b?rule=original", "https://static.fotocasa.es/images/ads/fa918140-6265-4dfc-96bc-1aaf14f303fb?rule=original", "https://static.fotocasa.es/images/ads/82056f81-005b-430a-893c-40ea1aee842a?rule=original", "https://static.fotocasa.es/images/ads/fa002655-81dc-4fc3-adbf-70ffe83a40f8?rule=original", "https://static.fotocasa.es/images/ads/5cf3eb74-aed6-49f8-88ed-bad6550041b6?rule=original", "https://static.fotocasa.es/images/ads/9af7dd94-2f82-41ce-ae06-33d570dc26e9?rule=original", "https://static.fotocasa.es/images/ads/72b23822-6d3b-4016-b2e3-da802a92fd76?rule=original", "https://static.fotocasa.es/images/ads/ee2ccae9-7c30-4177-bb42-03bb9609a065?rule=original", "https://static.fotocasa.es/images/ads/f0b1f283-744d-4323-87d8-4a72216bbd5f?rule=original", "https://static.fotocasa.es/images/ads/431750b4-be07-4a00-a33b-9013e7cce0bb?rule=original", "https://static.fotocasa.es/images/ads/155fb81b-a807-4c2b-825f-5d9a38c89847?rule=original", "https://static.fotocasa.es/images/ads/c28c1333-7de7-476d-ac71-723574709664?rule=original", "https://static.fotocasa.es/images/ads/46e8a125-4c09-4d15-b277-45dc4dc2da7f?rule=original", "https://static.fotocasa.es/images/ads/c943f2db-30d7-4360-ad46-11965d0a1408?rule=original", "https://static.fotocasa.es/images/ads/140aa934-f037-4778-b2e3-78ebb83e0c45?rule=original", "https://static.fotocasa.es/images/ads/dbbb7508-6dc6-44a8-afd1-00bbbaf96e5f?rule=original", "https://static.fotocasa.es/images/ads/eed290f0-5f48-4649-9df1-b9fe3d018dd2?rule=original", "https://static.fotocasa.es/images/ads/b51df9cf-9e17-46c0-bafd-e54486c2f0e5?rule=original", "https://static.fotocasa.es/images/ads/acb71be9-9d89-4ce5-b369-1524940c9539?rule=original", "https://static.fotocasa.es/images/ads/5c5f06db-631a-48ff-8e9c-924b5e2fa75f?rule=original", "https://static.fotocasa.es/images/ads/ecd7e51d-eb75-41cc-a97e-c875653f8512?rule=original", "https://static.fotocasa.es/images/ads/d6edeb0a-7e7e-4f82-bf89-e19f2515af99?rule=original", "https://static.fotocasa.es/images/ads/9071e5be-8946-4de3-8c27-98203b1c46dc?rule=original", "https://static.fotocasa.es/images/ads/9484a520-20e7-47f5-a4db-238cdb70c669?rule=original", "https://static.fotocasa.es/images/ads/87eb0e74-cdc6-427a-963f-c41ed822807e?rule=original", "https://static.fotocasa.es/images/ads/16cf11e3-587b-44b4-9508-18a579186dc9?rule=original", "https://static.fotocasa.es/images/ads/ccbc5a39-7220-49c2-b193-4f5a64675755?rule=original", "https://static.fotocasa.es/images/ads/1657f228-65a1-4572-98b4-e67d1b6f13f7?rule=original", "https://static.fotocasa.es/images/ads/c7420507-8a1a-4a1a-9518-c1057844cabd?rule=original", "https://static.fotocasa.es/images/ads/81ccfc8a-ec1d-4181-ad7f-cc31c29a09b6?rule=original", "https://static.fotocasa.es/images/ads/e145ff44-5033-4f08-b457-2f472223b78c?rule=original", "https://static.fotocasa.es/images/ads/64c8b053-5d77-4b2e-be61-5f2a1ed3420c?rule=original", "https://static.fotocasa.es/images/ads/da2417aa-d9ca-41c5-be31-e52c0d46b948?rule=original", "https://static.fotocasa.es/images/ads/9bec58c6-094c-4b6a-aada-5805d4805bc6?rule=original", "https://static.fotocasa.es/images/ads/14004a95-4421-418a-a8e8-3795b14f2e4c?rule=original", "https://static.fotocasa.es/images/ads/4d6d3cfc-2838-4978-9608-a4e7f4e43053?rule=original", "https://static.fotocasa.es/images/ads/72a1d044-94da-40db-a771-2407a6f259d2?rule=original", "https://static.fotocasa.es/images/ads/a2021097-397e-4bcd-b308-84701aea7f84?rule=original", "https://static.fotocasa.es/images/ads/73fe6ae9-f231-4df6-8cfd-a45605615a9e?rule=original", "https://static.fotocasa.es/images/ads/38e56020-8466-4953-9f75-abd4bf777646?rule=original", "https://static.fotocasa.es/images/ads/8772b8fc-2215-4281-a18a-abbefffa8e8d?rule=original", "https://static.fotocasa.es/images/ads/906c22ce-b94d-4ae0-bca9-95107c090370?rule=original", "https://static.fotocasa.es/images/ads/b7834292-a8d5-4925-a9ee-0c62dfaef3af?rule=original", "https://static.fotocasa.es/images/ads/b0c5070d-4984-4c47-b2cf-47e903c24df4?rule=original", "https://static.fotocasa.es/images/ads/8842d3a7-eca2-4a67-9645-be6a90731197?rule=original", "https://static.fotocasa.es/images/ads/dfe60f2b-3d52-49c6-935c-f93d04b82fc5?rule=original", "https://static.fotocasa.es/images/ads/c918480d-9ea4-4819-960a-24de026f1629?rule=original", "https://static.fotocasa.es/images/ads/a6476d8a-bf41-4b18-b3ce-e735733aa68f?rule=original", "https://static.fotocasa.es/images/ads/f9162236-27bb-46ed-8e28-ef87d3191121?rule=original", "https://static.fotocasa.es/images/ads/ea7950b7-c94a-4020-88dd-6406f6f9ab5b?rule=original", "https://static.fotocasa.es/images/ads/d9235b04-efa4-4c63-9d46-7abbfe4ea597?rule=original", "https://static.fotocasa.es/images/ads/edacabd0-e758-4a63-8596-d6f0b459eb80?rule=original", "https://static.fotocasa.es/images/ads/b0757c30-873d-4b63-9355-c65d30bf963e?rule=original", "https://static.fotocasa.es/images/ads/4edfd9a5-b204-477e-9076-e064c6ef0e10?rule=original"];
+    const mainPhoto = document.getElementById("main-photo");
+    const counter = document.getElementById("counter");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let current = 0;
+
+    function show(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      mainPhoto.src = images[current];
+      counter.textContent = `${current + 1}/${images.length}`;
+      thumbs.forEach((thumb, itemIndex) => thumb.classList.toggle("active", itemIndex === current));
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => show(current - 1));
+    document.querySelector(".next").addEventListener("click", () => show(current + 1));
+    thumbs.forEach(thumb => thumb.addEventListener("click", () => show(Number(thumb.dataset.index))));
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-jardin-terraza-trastero-patio-amueblado-piscina/189781818/d");
+      } catch (error) {
+        window.prompt("Copia el enlace", "https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-jardin-terraza-trastero-patio-amueblado-piscina/189781818/d");
+      }
+    });
+  </script>
+</body>
+</html>

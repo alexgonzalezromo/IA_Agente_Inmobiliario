@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>House_chalet en venta en SAMANIEGO-CMOR, 20, -1, Campoamor</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #667085;
+      --line: #d7dfdc;
+      --accent: #0f766e;
+      --accent-dark: #0a4f49;
+      --good: #137a3f;
+      --bad: #a33b2f;
+      --panel: #fff;
+      --soft: #eef3f1;
+      --warm: #fbf6ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f7f6;
+    }
+    a, button { font: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 18px 20px 54px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back, .external {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 10px 13px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+    .back { background: #18212d; }
+    .external:hover { background: var(--accent-dark); }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+    .gallery, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17, 24, 39, .09);
+    }
+    .stage {
+      position: relative;
+      background: #dbe4e2;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .stage img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+    .counter {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+    }
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 10px;
+      max-height: 230px;
+      overflow: auto;
+    }
+    .thumb {
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      aspect-ratio: 4 / 3;
+    }
+    .thumb.active { border-color: var(--accent); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .panel { padding: 20px; }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 30px; line-height: 1.12; margin: 0 0 10px; letter-spacing: 0; }
+    .location { margin: 0 0 16px; color: var(--muted); }
+    .price { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .delta { font-weight: 900; margin-bottom: 16px; }
+    .delta.below { color: var(--good); }
+    .delta.above { color: var(--bad); }
+    .delta.near { color: var(--accent); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .metrics div {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .metrics strong { display: block; }
+    .metrics span { color: var(--muted); font-size: 13px; }
+    .summary, .description {
+      color: #344054;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .analysis section {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .analysis h2 { font-size: 15px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #344054;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .stage, .stage img { height: 430px; min-height: 430px; }
+    }
+    @media (max-width: 560px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+      .stage, .stage img { height: 300px; min-height: 300px; }
+      .analysis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <a class="back" href="../index.html">Volver al ranking</a>
+      <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-parking-jardin-piscina/188038743/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+    </div>
+    <div class="layout">
+      <section class="gallery">
+        <div class="stage">
+          <button class="nav prev" type="button" aria-label="Foto anterior">&#8249;</button>
+          <img id="main-photo" src="https://static.fotocasa.es/images/ads/7aa35366-31bb-4285-ae8a-105b237f05a3?rule=original" alt="House_chalet en venta en SAMANIEGO-CMOR, 20, -1, Campoamor">
+          <button class="nav next" type="button" aria-label="Foto siguiente">&#8250;</button>
+          <div class="counter" id="counter">1/33</div>
+        </div>
+        <div class="thumbs"><button type="button" class="thumb active" data-index="0"><img src="https://static.fotocasa.es/images/ads/7aa35366-31bb-4285-ae8a-105b237f05a3?rule=original" alt="Foto 1"></button><button type="button" class="thumb" data-index="1"><img src="https://static.fotocasa.es/images/ads/3e3e07f4-8365-4f5b-a428-c5dbc9e3c994?rule=original" alt="Foto 2"></button><button type="button" class="thumb" data-index="2"><img src="https://static.fotocasa.es/images/ads/f4a6b96b-2fc0-48be-abd8-fdd6161e416e?rule=original" alt="Foto 3"></button><button type="button" class="thumb" data-index="3"><img src="https://static.fotocasa.es/images/ads/0511f667-85b5-404f-b1a9-22e4bb0d101c?rule=original" alt="Foto 4"></button><button type="button" class="thumb" data-index="4"><img src="https://static.fotocasa.es/images/ads/9c7d7e19-553a-4812-914f-1922df850d37?rule=original" alt="Foto 5"></button><button type="button" class="thumb" data-index="5"><img src="https://static.fotocasa.es/images/ads/0e9a3177-d68b-40a5-ba11-47e3b7d813ae?rule=original" alt="Foto 6"></button><button type="button" class="thumb" data-index="6"><img src="https://static.fotocasa.es/images/ads/1d8c6edc-b496-49e9-b3b0-e3c3de87c5db?rule=original" alt="Foto 7"></button><button type="button" class="thumb" data-index="7"><img src="https://static.fotocasa.es/images/ads/eb3d9b2e-47bf-4318-b817-9511a1159a2c?rule=original" alt="Foto 8"></button><button type="button" class="thumb" data-index="8"><img src="https://static.fotocasa.es/images/ads/cd6d131f-4d0b-4d58-a321-a8dcbf5d8eb6?rule=original" alt="Foto 9"></button><button type="button" class="thumb" data-index="9"><img src="https://static.fotocasa.es/images/ads/3ef63bfd-5fa0-4e18-b61e-f9378c27130b?rule=original" alt="Foto 10"></button><button type="button" class="thumb" data-index="10"><img src="https://static.fotocasa.es/images/ads/91e3cfd9-c550-4dd4-ba5c-812fe4ca3167?rule=original" alt="Foto 11"></button><button type="button" class="thumb" data-index="11"><img src="https://static.fotocasa.es/images/ads/83c13b82-6746-4479-81c3-a1fad75a7090?rule=original" alt="Foto 12"></button><button type="button" class="thumb" data-index="12"><img src="https://static.fotocasa.es/images/ads/106e6f88-8172-48a2-9621-10081840f030?rule=original" alt="Foto 13"></button><button type="button" class="thumb" data-index="13"><img src="https://static.fotocasa.es/images/ads/7fe785ac-5a63-41e6-ad27-79e00bdfedc2?rule=original" alt="Foto 14"></button><button type="button" class="thumb" data-index="14"><img src="https://static.fotocasa.es/images/ads/d30c131d-f0db-4df6-9182-72d51193a7e0?rule=original" alt="Foto 15"></button><button type="button" class="thumb" data-index="15"><img src="https://static.fotocasa.es/images/ads/25cbca48-b59d-4693-b3db-05e765530cc9?rule=original" alt="Foto 16"></button><button type="button" class="thumb" data-index="16"><img src="https://static.fotocasa.es/images/ads/b7247343-072e-4c99-a5f2-87f08107365f?rule=original" alt="Foto 17"></button><button type="button" class="thumb" data-index="17"><img src="https://static.fotocasa.es/images/ads/2345adba-b34d-45f8-8b16-58a527cfd4e7?rule=original" alt="Foto 18"></button><button type="button" class="thumb" data-index="18"><img src="https://static.fotocasa.es/images/ads/2b624f6e-ae28-4ffe-9dc5-d540ad1bd304?rule=original" alt="Foto 19"></button><button type="button" class="thumb" data-index="19"><img src="https://static.fotocasa.es/images/ads/374acd0e-5554-42e0-afa8-1c894a85cd39?rule=original" alt="Foto 20"></button><button type="button" class="thumb" data-index="20"><img src="https://static.fotocasa.es/images/ads/715569c0-291a-4632-aee5-f2a0236219b2?rule=original" alt="Foto 21"></button><button type="button" class="thumb" data-index="21"><img src="https://static.fotocasa.es/images/ads/b64248e7-17a8-4113-92b4-e5fab0cb4afd?rule=original" alt="Foto 22"></button><button type="button" class="thumb" data-index="22"><img src="https://static.fotocasa.es/images/ads/2133340c-fc52-4883-ad25-7591f14ea192?rule=original" alt="Foto 23"></button><button type="button" class="thumb" data-index="23"><img src="https://static.fotocasa.es/images/ads/4bce16d3-7408-4816-915d-cfbb01584e5b?rule=original" alt="Foto 24"></button><button type="button" class="thumb" data-index="24"><img src="https://static.fotocasa.es/images/ads/3528d467-aec9-4060-a74a-30a71e241504?rule=original" alt="Foto 25"></button><button type="button" class="thumb" data-index="25"><img src="https://static.fotocasa.es/images/ads/4ca4c4f7-be75-407d-b354-3cf215b8cd1c?rule=original" alt="Foto 26"></button><button type="button" class="thumb" data-index="26"><img src="https://static.fotocasa.es/images/ads/0635be7e-52ca-4bfb-8f54-7cfc97adfeee?rule=original" alt="Foto 27"></button><button type="button" class="thumb" data-index="27"><img src="https://static.fotocasa.es/images/ads/cee53e41-fc06-4701-8921-d012d7c0d483?rule=original" alt="Foto 28"></button><button type="button" class="thumb" data-index="28"><img src="https://static.fotocasa.es/images/ads/e45d4674-98bf-419f-907b-a2f3d7b00c92?rule=original" alt="Foto 29"></button><button type="button" class="thumb" data-index="29"><img src="https://static.fotocasa.es/images/ads/778e2ed9-7218-4172-acf0-81fa16236223?rule=original" alt="Foto 30"></button><button type="button" class="thumb" data-index="30"><img src="https://static.fotocasa.es/images/ads/26b08f9f-efcf-4c2e-bae9-4ec21bbfa3e7?rule=original" alt="Foto 31"></button><button type="button" class="thumb" data-index="31"><img src="https://static.fotocasa.es/images/ads/69594b5c-f66f-462f-a96b-fd8b25898839?rule=original" alt="Foto 32"></button><button type="button" class="thumb" data-index="32"><img src="https://static.fotocasa.es/images/ads/58d7f056-c3dd-401b-830e-3e48d82bf51c?rule=original" alt="Foto 33"></button></div>
+      </section>
+      <aside class="panel">
+        <div class="score">100/100 encaje</div>
+        <h1>House_chalet en venta en SAMANIEGO-CMOR, 20, -1, Campoamor</h1>
+        <p class="location">SAMANIEGO-CMOR, 20, -1, Campoamor</p>
+        <div class="price">282.150 EUR</div>
+        <div class="delta below">-91.323 EUR frente al ML</div>
+        <div class="metrics">
+          <div><strong>2</strong><span>Habitaciones</span></div>
+          <div><strong>2</strong><span>Banos</span></div>
+          <div><strong>156 m2</strong><span>Superficie</span></div>
+          <div><strong>1.808 EUR</strong><span>Precio por m2</span></div>
+        </div>
+        <p class="summary">Descubre este impresionante dúplex casi nuevo en Orihuela, Alicante, que combina lujo y comodidad en un entorno idílico. Con un precio de 282,150€, esta propiedad de 156m² ofrece una experiencia de vida inigualable, con vistas panorámicas al mar y a la.</p>
+        <div class="actions">
+          <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-parking-jardin-piscina/188038743/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+          <button class="ghost" type="button" id="copy">Copiar enlace</button>
+        </div>
+      </aside>
+    </div>
+    <section class="analysis">
+      <section>
+        <h2>Por que encaja</h2>
+        <ul><li>Sale por debajo de la estimacion del modelo de precio.</li><li>Tiene al menos dos dormitorios.</li><li>Tiene una superficie interesante para la zona.</li><li>Menciona extras valorables como terraza, piscina, jardin o parking.</li></ul>
+      </section>
+      <section>
+        <h2>Riesgos</h2>
+        <ul><li>Sin riesgos destacados en los datos disponibles.</li></ul>
+      </section>
+    </section>
+    <p class="description">Descubre este impresionante dúplex casi nuevo en Orihuela, Alicante, que combina lujo y comodidad en un entorno idílico. Con un precio de 282,150€, esta propiedad de 156m² ofrece una experiencia de vida inigualable, con vistas panorámicas al mar y a la montaña, ideal para disfrutar del clima mediterráneo.
+
+El interior cuenta con 2 amplias habitaciones y 2 baños, además de un luminoso salón y un comedor de concepto abierto. Disfruta de la tranquilidad en tu balcón o en la terraza cubierta, rodeado de un hermoso jardín con árboles frutales. La propiedad también incluye acceso a una piscina, un patio y un porche, perfectos para relajarse y entretenerse.
+
+Ubicada en una comunidad cerrada, esta casa está cerca de campos de golf, playas y espacios verdes, ofreciendo un estilo de vida activo y saludable. No pierdas la oportunidad de vivir en este paraíso; ¡contáctanos hoy para programar una visita y enamorarte de tu nuevo hogar!</p>
+  </main>
+  <script>
+    const images = ["https://static.fotocasa.es/images/ads/7aa35366-31bb-4285-ae8a-105b237f05a3?rule=original", "https://static.fotocasa.es/images/ads/3e3e07f4-8365-4f5b-a428-c5dbc9e3c994?rule=original", "https://static.fotocasa.es/images/ads/f4a6b96b-2fc0-48be-abd8-fdd6161e416e?rule=original", "https://static.fotocasa.es/images/ads/0511f667-85b5-404f-b1a9-22e4bb0d101c?rule=original", "https://static.fotocasa.es/images/ads/9c7d7e19-553a-4812-914f-1922df850d37?rule=original", "https://static.fotocasa.es/images/ads/0e9a3177-d68b-40a5-ba11-47e3b7d813ae?rule=original", "https://static.fotocasa.es/images/ads/1d8c6edc-b496-49e9-b3b0-e3c3de87c5db?rule=original", "https://static.fotocasa.es/images/ads/eb3d9b2e-47bf-4318-b817-9511a1159a2c?rule=original", "https://static.fotocasa.es/images/ads/cd6d131f-4d0b-4d58-a321-a8dcbf5d8eb6?rule=original", "https://static.fotocasa.es/images/ads/3ef63bfd-5fa0-4e18-b61e-f9378c27130b?rule=original", "https://static.fotocasa.es/images/ads/91e3cfd9-c550-4dd4-ba5c-812fe4ca3167?rule=original", "https://static.fotocasa.es/images/ads/83c13b82-6746-4479-81c3-a1fad75a7090?rule=original", "https://static.fotocasa.es/images/ads/106e6f88-8172-48a2-9621-10081840f030?rule=original", "https://static.fotocasa.es/images/ads/7fe785ac-5a63-41e6-ad27-79e00bdfedc2?rule=original", "https://static.fotocasa.es/images/ads/d30c131d-f0db-4df6-9182-72d51193a7e0?rule=original", "https://static.fotocasa.es/images/ads/25cbca48-b59d-4693-b3db-05e765530cc9?rule=original", "https://static.fotocasa.es/images/ads/b7247343-072e-4c99-a5f2-87f08107365f?rule=original", "https://static.fotocasa.es/images/ads/2345adba-b34d-45f8-8b16-58a527cfd4e7?rule=original", "https://static.fotocasa.es/images/ads/2b624f6e-ae28-4ffe-9dc5-d540ad1bd304?rule=original", "https://static.fotocasa.es/images/ads/374acd0e-5554-42e0-afa8-1c894a85cd39?rule=original", "https://static.fotocasa.es/images/ads/715569c0-291a-4632-aee5-f2a0236219b2?rule=original", "https://static.fotocasa.es/images/ads/b64248e7-17a8-4113-92b4-e5fab0cb4afd?rule=original", "https://static.fotocasa.es/images/ads/2133340c-fc52-4883-ad25-7591f14ea192?rule=original", "https://static.fotocasa.es/images/ads/4bce16d3-7408-4816-915d-cfbb01584e5b?rule=original", "https://static.fotocasa.es/images/ads/3528d467-aec9-4060-a74a-30a71e241504?rule=original", "https://static.fotocasa.es/images/ads/4ca4c4f7-be75-407d-b354-3cf215b8cd1c?rule=original", "https://static.fotocasa.es/images/ads/0635be7e-52ca-4bfb-8f54-7cfc97adfeee?rule=original", "https://static.fotocasa.es/images/ads/cee53e41-fc06-4701-8921-d012d7c0d483?rule=original", "https://static.fotocasa.es/images/ads/e45d4674-98bf-419f-907b-a2f3d7b00c92?rule=original", "https://static.fotocasa.es/images/ads/778e2ed9-7218-4172-acf0-81fa16236223?rule=original", "https://static.fotocasa.es/images/ads/26b08f9f-efcf-4c2e-bae9-4ec21bbfa3e7?rule=original", "https://static.fotocasa.es/images/ads/69594b5c-f66f-462f-a96b-fd8b25898839?rule=original", "https://static.fotocasa.es/images/ads/58d7f056-c3dd-401b-830e-3e48d82bf51c?rule=original"];
+    const mainPhoto = document.getElementById("main-photo");
+    const counter = document.getElementById("counter");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let current = 0;
+
+    function show(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      mainPhoto.src = images[current];
+      counter.textContent = `${current + 1}/${images.length}`;
+      thumbs.forEach((thumb, itemIndex) => thumb.classList.toggle("active", itemIndex === current));
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => show(current - 1));
+    document.querySelector(".next").addEventListener("click", () => show(current + 1));
+    thumbs.forEach(thumb => thumb.addEventListener("click", () => show(Number(thumb.dataset.index))));
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-parking-jardin-piscina/188038743/d");
+      } catch (error) {
+        window.prompt("Copia el enlace", "https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-parking-jardin-piscina/188038743/d");
+      }
+    });
+  </script>
+</body>
+</html>

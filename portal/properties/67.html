@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apartamento en venta en Campoamor</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #667085;
+      --line: #d7dfdc;
+      --accent: #0f766e;
+      --accent-dark: #0a4f49;
+      --good: #137a3f;
+      --bad: #a33b2f;
+      --panel: #fff;
+      --soft: #eef3f1;
+      --warm: #fbf6ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f7f6;
+    }
+    a, button { font: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 18px 20px 54px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back, .external {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 10px 13px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+    .back { background: #18212d; }
+    .external:hover { background: var(--accent-dark); }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+    .gallery, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17, 24, 39, .09);
+    }
+    .stage {
+      position: relative;
+      background: #dbe4e2;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .stage img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+    .counter {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+    }
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 10px;
+      max-height: 230px;
+      overflow: auto;
+    }
+    .thumb {
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      aspect-ratio: 4 / 3;
+    }
+    .thumb.active { border-color: var(--accent); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .panel { padding: 20px; }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 30px; line-height: 1.12; margin: 0 0 10px; letter-spacing: 0; }
+    .location { margin: 0 0 16px; color: var(--muted); }
+    .price { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .delta { font-weight: 900; margin-bottom: 16px; }
+    .delta.below { color: var(--good); }
+    .delta.above { color: var(--bad); }
+    .delta.near { color: var(--accent); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .metrics div {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .metrics strong { display: block; }
+    .metrics span { color: var(--muted); font-size: 13px; }
+    .summary, .description {
+      color: #344054;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .analysis section {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .analysis h2 { font-size: 15px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #344054;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .stage, .stage img { height: 430px; min-height: 430px; }
+    }
+    @media (max-width: 560px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+      .stage, .stage img { height: 300px; min-height: 300px; }
+      .analysis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <a class="back" href="../index.html">Volver al ranking</a>
+      <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-terraza-zona-comunitaria-ascensor-piscina-amueblado-piscina/182126960/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+    </div>
+    <div class="layout">
+      <section class="gallery">
+        <div class="stage">
+          <button class="nav prev" type="button" aria-label="Foto anterior">&#8249;</button>
+          <img id="main-photo" src="https://static.fotocasa.es/images/ads/e1274379-0a32-4d2b-b866-eb50bf19b9b2?rule=original" alt="Apartamento en venta en Campoamor">
+          <button class="nav next" type="button" aria-label="Foto siguiente">&#8250;</button>
+          <div class="counter" id="counter">1/15</div>
+        </div>
+        <div class="thumbs"><button type="button" class="thumb active" data-index="0"><img src="https://static.fotocasa.es/images/ads/e1274379-0a32-4d2b-b866-eb50bf19b9b2?rule=original" alt="Foto 1"></button><button type="button" class="thumb" data-index="1"><img src="https://static.fotocasa.es/images/ads/6996915c-1312-4f4f-b46d-d8bdefe31275?rule=original" alt="Foto 2"></button><button type="button" class="thumb" data-index="2"><img src="https://static.fotocasa.es/images/ads/769a0494-fea5-40bb-bef7-5e9c0b053db1?rule=original" alt="Foto 3"></button><button type="button" class="thumb" data-index="3"><img src="https://static.fotocasa.es/images/ads/ac103148-7f1a-472d-be90-002fcb0058ac?rule=original" alt="Foto 4"></button><button type="button" class="thumb" data-index="4"><img src="https://static.fotocasa.es/images/ads/da7d848d-e191-40f1-b311-ec2079fc3d62?rule=original" alt="Foto 5"></button><button type="button" class="thumb" data-index="5"><img src="https://static.fotocasa.es/images/ads/25d3ba98-4080-47b0-ac72-9425e69c97ec?rule=original" alt="Foto 6"></button><button type="button" class="thumb" data-index="6"><img src="https://static.fotocasa.es/images/ads/7e1fc6d4-e191-4ce3-b227-9bcaafe26924?rule=original" alt="Foto 7"></button><button type="button" class="thumb" data-index="7"><img src="https://static.fotocasa.es/images/ads/a7d9ecf4-8121-49a7-b61d-776ac61dfde1?rule=original" alt="Foto 8"></button><button type="button" class="thumb" data-index="8"><img src="https://static.fotocasa.es/images/ads/3a06084a-c77a-4f5b-8744-b09407561afe?rule=original" alt="Foto 9"></button><button type="button" class="thumb" data-index="9"><img src="https://static.fotocasa.es/images/ads/f9cff659-d967-455f-b6cb-917f3f53ffa6?rule=original" alt="Foto 10"></button><button type="button" class="thumb" data-index="10"><img src="https://static.fotocasa.es/images/ads/c7fd1d0c-da12-42f5-ab4c-33d73cc1eddf?rule=original" alt="Foto 11"></button><button type="button" class="thumb" data-index="11"><img src="https://static.fotocasa.es/images/ads/7c404d96-8baf-4424-92d3-c45cb627f199?rule=original" alt="Foto 12"></button><button type="button" class="thumb" data-index="12"><img src="https://static.fotocasa.es/images/ads/835469b3-a46f-4eed-95c9-4a77222bfac9?rule=original" alt="Foto 13"></button><button type="button" class="thumb" data-index="13"><img src="https://static.fotocasa.es/images/ads/4cf9f938-8d02-430e-9e3d-54da854b5061?rule=original" alt="Foto 14"></button><button type="button" class="thumb" data-index="14"><img src="https://static.fotocasa.es/images/ads/4e919601-f7d9-40eb-bf64-49407981091c?rule=original" alt="Foto 15"></button></div>
+      </section>
+      <aside class="panel">
+        <div class="score">100/100 encaje</div>
+        <h1>Apartamento en venta en Campoamor</h1>
+        <p class="location">Campoamor</p>
+        <div class="price">260.000 EUR</div>
+        <div class="delta below">-48.155 EUR frente al ML</div>
+        <div class="metrics">
+          <div><strong>3</strong><span>Habitaciones</span></div>
+          <div><strong>2</strong><span>Banos</span></div>
+          <div><strong>100 m2</strong><span>Superficie</span></div>
+          <div><strong>2.600 EUR</strong><span>Precio por m2</span></div>
+        </div>
+        <p class="summary">Se vende apartamento con plaza de garaje privada y piscina comunitaria en Altos de Campoamor, Orihuela. El apartamento tiene una excelente ubicación cerca a todos los servicios, a tan solo 900 m de la playa de la Glea, Campoamor. El edificio cuenta con.</p>
+        <div class="actions">
+          <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-terraza-zona-comunitaria-ascensor-piscina-amueblado-piscina/182126960/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+          <button class="ghost" type="button" id="copy">Copiar enlace</button>
+        </div>
+      </aside>
+    </div>
+    <section class="analysis">
+      <section>
+        <h2>Por que encaja</h2>
+        <ul><li>Sale por debajo de la estimacion del modelo de precio.</li><li>Tiene al menos dos dormitorios.</li><li>Tiene una superficie interesante para la zona.</li><li>Menciona extras valorables como terraza, piscina, jardin o parking.</li></ul>
+      </section>
+      <section>
+        <h2>Riesgos</h2>
+        <ul><li>Sin riesgos destacados en los datos disponibles.</li></ul>
+      </section>
+    </section>
+    <p class="description">Se vende apartamento con plaza de garaje privada y piscina comunitaria en Altos de Campoamor, Orihuela. El apartamento tiene una excelente ubicación cerca a todos los servicios, a tan solo 900 m de la playa de la Glea, Campoamor. El edificio cuenta con ascensor. El apartamento se encuentra en la segunda planta. La vivienda se distribuye en la siguiente manera: tiene salón-comedor con acceso  a la terraza de unos 10 m2 con orientación sur, tres dormitorios con armarios empotrados, cocina independiente con todos los electrodomésticos, dos baños completos. En la urbanización tenemos una piscina comunitaria. También dispone de un plaza de garaje privada en el mismo edificio, subterráneo. Con todos servicios cerca como supermercados, tiendas de barrio, tanto de alimentación como de otros servicios, restaurantes, panadería, farmacia etc. 
+Para ti que buscas una vivienda moderna y prácticamente por encima de la playa! No pierdes esta oportunidad de encontrar una vivienda única y con un gran potencial de alquiler.
+ Llámenos para concertar una visita! 
+ Si quieren una visita virtual o un plano, no duden en contactar nos.
+ También será una muy buena inversión y ayudamos con nuestro exitoso servicio de alquiler por temporada. Contacte nos para más información.</p>
+  </main>
+  <script>
+    const images = ["https://static.fotocasa.es/images/ads/e1274379-0a32-4d2b-b866-eb50bf19b9b2?rule=original", "https://static.fotocasa.es/images/ads/6996915c-1312-4f4f-b46d-d8bdefe31275?rule=original", "https://static.fotocasa.es/images/ads/769a0494-fea5-40bb-bef7-5e9c0b053db1?rule=original", "https://static.fotocasa.es/images/ads/ac103148-7f1a-472d-be90-002fcb0058ac?rule=original", "https://static.fotocasa.es/images/ads/da7d848d-e191-40f1-b311-ec2079fc3d62?rule=original", "https://static.fotocasa.es/images/ads/25d3ba98-4080-47b0-ac72-9425e69c97ec?rule=original", "https://static.fotocasa.es/images/ads/7e1fc6d4-e191-4ce3-b227-9bcaafe26924?rule=original", "https://static.fotocasa.es/images/ads/a7d9ecf4-8121-49a7-b61d-776ac61dfde1?rule=original", "https://static.fotocasa.es/images/ads/3a06084a-c77a-4f5b-8744-b09407561afe?rule=original", "https://static.fotocasa.es/images/ads/f9cff659-d967-455f-b6cb-917f3f53ffa6?rule=original", "https://static.fotocasa.es/images/ads/c7fd1d0c-da12-42f5-ab4c-33d73cc1eddf?rule=original", "https://static.fotocasa.es/images/ads/7c404d96-8baf-4424-92d3-c45cb627f199?rule=original", "https://static.fotocasa.es/images/ads/835469b3-a46f-4eed-95c9-4a77222bfac9?rule=original", "https://static.fotocasa.es/images/ads/4cf9f938-8d02-430e-9e3d-54da854b5061?rule=original", "https://static.fotocasa.es/images/ads/4e919601-f7d9-40eb-bf64-49407981091c?rule=original"];
+    const mainPhoto = document.getElementById("main-photo");
+    const counter = document.getElementById("counter");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let current = 0;
+
+    function show(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      mainPhoto.src = images[current];
+      counter.textContent = `${current + 1}/${images.length}`;
+      thumbs.forEach((thumb, itemIndex) => thumb.classList.toggle("active", itemIndex === current));
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => show(current - 1));
+    document.querySelector(".next").addEventListener("click", () => show(current + 1));
+    thumbs.forEach(thumb => thumb.addEventListener("click", () => show(Number(thumb.dataset.index))));
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-terraza-zona-comunitaria-ascensor-piscina-amueblado-piscina/182126960/d");
+      } catch (error) {
+        window.prompt("Copia el enlace", "https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-calefaccion-parking-terraza-zona-comunitaria-ascensor-piscina-amueblado-piscina/182126960/d");
+      }
+    });
+  </script>
+</body>
+</html>

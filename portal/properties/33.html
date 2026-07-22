@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adosado en venta en Avenida Miguel de Cervantes, 75, Campoamor</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #667085;
+      --line: #d7dfdc;
+      --accent: #0f766e;
+      --accent-dark: #0a4f49;
+      --good: #137a3f;
+      --bad: #a33b2f;
+      --panel: #fff;
+      --soft: #eef3f1;
+      --warm: #fbf6ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f7f6;
+    }
+    a, button { font: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 18px 20px 54px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .back, .external {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 10px 13px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+    .back { background: #18212d; }
+    .external:hover { background: var(--accent-dark); }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+    .gallery, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17, 24, 39, .09);
+    }
+    .stage {
+      position: relative;
+      background: #dbe4e2;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .stage img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(17, 24, 39, .72);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+    .counter {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(17,24,39,.78);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+    }
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 10px;
+      max-height: 230px;
+      overflow: auto;
+    }
+    .thumb {
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      aspect-ratio: 4 / 3;
+    }
+    .thumb.active { border-color: var(--accent); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .panel { padding: 20px; }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 30px; line-height: 1.12; margin: 0 0 10px; letter-spacing: 0; }
+    .location { margin: 0 0 16px; color: var(--muted); }
+    .price { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .delta { font-weight: 900; margin-bottom: 16px; }
+    .delta.below { color: var(--good); }
+    .delta.above { color: var(--bad); }
+    .delta.near { color: var(--accent); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .metrics div {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .metrics strong { display: block; }
+    .metrics span { color: var(--muted); font-size: 13px; }
+    .summary, .description {
+      color: #344054;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .analysis section {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .analysis h2 { font-size: 15px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.45; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #344054;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .stage, .stage img { height: 430px; min-height: 430px; }
+    }
+    @media (max-width: 560px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+      .stage, .stage img { height: 300px; min-height: 300px; }
+      .analysis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top">
+      <a class="back" href="../index.html">Volver al ranking</a>
+      <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-terraza-amueblado/189471905/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+    </div>
+    <div class="layout">
+      <section class="gallery">
+        <div class="stage">
+          <button class="nav prev" type="button" aria-label="Foto anterior">&#8249;</button>
+          <img id="main-photo" src="https://static.fotocasa.es/images/ads/27a6ef2e-4d4e-438d-9b67-fa02445dc652?rule=original" alt="Adosado en venta en Avenida Miguel de Cervantes, 75, Campoamor">
+          <button class="nav next" type="button" aria-label="Foto siguiente">&#8250;</button>
+          <div class="counter" id="counter">1/19</div>
+        </div>
+        <div class="thumbs"><button type="button" class="thumb active" data-index="0"><img src="https://static.fotocasa.es/images/ads/27a6ef2e-4d4e-438d-9b67-fa02445dc652?rule=original" alt="Foto 1"></button><button type="button" class="thumb" data-index="1"><img src="https://static.fotocasa.es/images/ads/bbfaf4f2-a2e3-47c4-9511-3bf466592f64?rule=original" alt="Foto 2"></button><button type="button" class="thumb" data-index="2"><img src="https://static.fotocasa.es/images/ads/c117bea0-4de4-4d90-90d1-06d33092fc5f?rule=original" alt="Foto 3"></button><button type="button" class="thumb" data-index="3"><img src="https://static.fotocasa.es/images/ads/d22465a8-1b8b-482c-a89b-25c7332f8f2e?rule=original" alt="Foto 4"></button><button type="button" class="thumb" data-index="4"><img src="https://static.fotocasa.es/images/ads/2e76c0e8-c12b-4bc8-a072-41b28a210f3c?rule=original" alt="Foto 5"></button><button type="button" class="thumb" data-index="5"><img src="https://static.fotocasa.es/images/ads/08cda8ec-6aa5-4b5c-9fbf-0a516ca5b1e0?rule=original" alt="Foto 6"></button><button type="button" class="thumb" data-index="6"><img src="https://static.fotocasa.es/images/ads/e482d754-c8f1-4868-b152-0e1c7b095621?rule=original" alt="Foto 7"></button><button type="button" class="thumb" data-index="7"><img src="https://static.fotocasa.es/images/ads/c4de4cb1-1eff-49dc-ba83-0730715c0bae?rule=original" alt="Foto 8"></button><button type="button" class="thumb" data-index="8"><img src="https://static.fotocasa.es/images/ads/5d9176f8-3db4-4a8e-b480-2b25edcc5053?rule=original" alt="Foto 9"></button><button type="button" class="thumb" data-index="9"><img src="https://static.fotocasa.es/images/ads/d4540063-1478-4ec4-80f1-c660f9f9f0f7?rule=original" alt="Foto 10"></button><button type="button" class="thumb" data-index="10"><img src="https://static.fotocasa.es/images/ads/29e52dea-8ef3-43f5-a081-893feebe9277?rule=original" alt="Foto 11"></button><button type="button" class="thumb" data-index="11"><img src="https://static.fotocasa.es/images/ads/1542e3b3-b6bb-4e61-9e01-9c62378d6263?rule=original" alt="Foto 12"></button><button type="button" class="thumb" data-index="12"><img src="https://static.fotocasa.es/images/ads/8d449193-1019-4f56-819f-6c7414a9df92?rule=original" alt="Foto 13"></button><button type="button" class="thumb" data-index="13"><img src="https://static.fotocasa.es/images/ads/60a1e21c-e8e0-4df4-9a9a-9feaca985891?rule=original" alt="Foto 14"></button><button type="button" class="thumb" data-index="14"><img src="https://static.fotocasa.es/images/ads/655be36b-c240-4381-ada3-ac5ca0eb30b4?rule=original" alt="Foto 15"></button><button type="button" class="thumb" data-index="15"><img src="https://static.fotocasa.es/images/ads/9b94c8c7-89dd-49d5-a4d8-b0d3d844213e?rule=original" alt="Foto 16"></button><button type="button" class="thumb" data-index="16"><img src="https://static.fotocasa.es/images/ads/bd9a6c79-ddf5-470a-bdff-332a7ca9c55d?rule=original" alt="Foto 17"></button><button type="button" class="thumb" data-index="17"><img src="https://static.fotocasa.es/images/ads/b11f031f-6759-419e-976b-fddf208b9e6a?rule=original" alt="Foto 18"></button><button type="button" class="thumb" data-index="18"><img src="https://static.fotocasa.es/images/ads/a2d45887-5de3-4553-a7c4-4c1db73e440f?rule=original" alt="Foto 19"></button></div>
+      </section>
+      <aside class="panel">
+        <div class="score">88/100 encaje</div>
+        <h1>Adosado en venta en Avenida Miguel de Cervantes, 75, Campoamor</h1>
+        <p class="location">Avenida Miguel de Cervantes, 75, Campoamor</p>
+        <div class="price">300.000 EUR</div>
+        <div class="delta above">+11.434 EUR frente al ML</div>
+        <div class="metrics">
+          <div><strong>3</strong><span>Habitaciones</span></div>
+          <div><strong>2</strong><span>Banos</span></div>
+          <div><strong>90 m2</strong><span>Superficie</span></div>
+          <div><strong>3.333 EUR</strong><span>Precio por m2</span></div>
+        </div>
+        <p class="summary">Espectacular dúplex en el centro de Campoamor, a solamente 400 mts de la playa, con una superficie de120 m2 y 45 m2 de porche y patio. La vivienda tiene un salón-comedor super bonito, amplia, acogedor, moderno, con mucha luz y con una cocina americana.</p>
+        <div class="actions">
+          <a class="external" href="https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-terraza-amueblado/189471905/d" target="_blank" rel="noreferrer">Ir al sitio web original</a>
+          <button class="ghost" type="button" id="copy">Copiar enlace</button>
+        </div>
+      </aside>
+    </div>
+    <section class="analysis">
+      <section>
+        <h2>Por que encaja</h2>
+        <ul><li>Tiene al menos dos dormitorios.</li><li>Tiene una superficie interesante para la zona.</li></ul>
+      </section>
+      <section>
+        <h2>Riesgos</h2>
+        <ul><li>El precio esta por encima de la estimacion del modelo.</li></ul>
+      </section>
+    </section>
+    <p class="description">Espectacular dúplex en el centro de Campoamor, a solamente 400 mts de la playa, con una superficie de120 m2 y 45 m2 de porche y patio. La vivienda tiene un salón-comedor super bonito, amplia, acogedor, moderno, con mucha luz y con una cocina americana totalmente equipada. Este fabuloso duplex cuenta con 3 dormitorios todos ellos con armarios empotrados y AACCC y 2 baños completos. Además, cuenta con un trastero, y mucho espacio trasero de almacenaje. Está totalmente amueblado para entrar a vivir. Tiene Instalación de 3 maquinas de Aire acondicionado, una perfecta orientación a Oeste y se respira bienestar y confort, envuelto en belleza. Una preciosa casa. En una de las mejores zonas con todos servicios cercanos.</p>
+  </main>
+  <script>
+    const images = ["https://static.fotocasa.es/images/ads/27a6ef2e-4d4e-438d-9b67-fa02445dc652?rule=original", "https://static.fotocasa.es/images/ads/bbfaf4f2-a2e3-47c4-9511-3bf466592f64?rule=original", "https://static.fotocasa.es/images/ads/c117bea0-4de4-4d90-90d1-06d33092fc5f?rule=original", "https://static.fotocasa.es/images/ads/d22465a8-1b8b-482c-a89b-25c7332f8f2e?rule=original", "https://static.fotocasa.es/images/ads/2e76c0e8-c12b-4bc8-a072-41b28a210f3c?rule=original", "https://static.fotocasa.es/images/ads/08cda8ec-6aa5-4b5c-9fbf-0a516ca5b1e0?rule=original", "https://static.fotocasa.es/images/ads/e482d754-c8f1-4868-b152-0e1c7b095621?rule=original", "https://static.fotocasa.es/images/ads/c4de4cb1-1eff-49dc-ba83-0730715c0bae?rule=original", "https://static.fotocasa.es/images/ads/5d9176f8-3db4-4a8e-b480-2b25edcc5053?rule=original", "https://static.fotocasa.es/images/ads/d4540063-1478-4ec4-80f1-c660f9f9f0f7?rule=original", "https://static.fotocasa.es/images/ads/29e52dea-8ef3-43f5-a081-893feebe9277?rule=original", "https://static.fotocasa.es/images/ads/1542e3b3-b6bb-4e61-9e01-9c62378d6263?rule=original", "https://static.fotocasa.es/images/ads/8d449193-1019-4f56-819f-6c7414a9df92?rule=original", "https://static.fotocasa.es/images/ads/60a1e21c-e8e0-4df4-9a9a-9feaca985891?rule=original", "https://static.fotocasa.es/images/ads/655be36b-c240-4381-ada3-ac5ca0eb30b4?rule=original", "https://static.fotocasa.es/images/ads/9b94c8c7-89dd-49d5-a4d8-b0d3d844213e?rule=original", "https://static.fotocasa.es/images/ads/bd9a6c79-ddf5-470a-bdff-332a7ca9c55d?rule=original", "https://static.fotocasa.es/images/ads/b11f031f-6759-419e-976b-fddf208b9e6a?rule=original", "https://static.fotocasa.es/images/ads/a2d45887-5de3-4553-a7c4-4c1db73e440f?rule=original"];
+    const mainPhoto = document.getElementById("main-photo");
+    const counter = document.getElementById("counter");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let current = 0;
+
+    function show(index) {
+      if (!images.length) return;
+      current = (index + images.length) % images.length;
+      mainPhoto.src = images[current];
+      counter.textContent = `${current + 1}/${images.length}`;
+      thumbs.forEach((thumb, itemIndex) => thumb.classList.toggle("active", itemIndex === current));
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => show(current - 1));
+    document.querySelector(".next").addEventListener("click", () => show(current + 1));
+    thumbs.forEach(thumb => thumb.addEventListener("click", () => show(Number(thumb.dataset.index))));
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-terraza-amueblado/189471905/d");
+      } catch (error) {
+        window.prompt("Copia el enlace", "https://www.fotocasa.es/es/comprar/vivienda/orihuela/aire-acondicionado-terraza-amueblado/189471905/d");
+      }
+    });
+  </script>
+</body>
+</html>
