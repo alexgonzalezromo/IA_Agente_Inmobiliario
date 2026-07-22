@@ -1,122 +1,66 @@
 # AI Agente Inmobiliario
 
-Este proyecto nace de una idea bastante sencilla: si quiero encontrar buenas
-casas en Campoamor, prefiero que un programa haga la parte repetitiva por mi.
+Este proyecto es mi intento de convertir una busqueda inmobiliaria normal en
+algo mucho mas comodo, visual y con datos.
 
-La idea es juntar anuncios de varias webs, guardar los datos en una base SQLite,
-estimar si el precio parece razonable con un modelo de machine learning y generar
-un portal estatico bonito para revisar las viviendas con calma, con sus fotos,
-filtros y enlace directo al anuncio original.
+La idea empezo con una pregunta bastante simple: si estoy mirando casas en
+Campoamor, por que tengo que ir web por web, abrir anuncios repetidos, comparar
+precios a ojo y perder viviendas interesantes entre tantas pestanas?
 
-No pretende ser una tasacion profesional ni sustituir mirar una casa de verdad.
-Es mas bien una herramienta para no perder oportunidades y comparar anuncios con
-un poco mas de criterio.
+Asi que empece a construir un agente que busca anuncios, guarda la informacion
+importante, estima si el precio tiene sentido y genera un portal propio para
+revisarlo todo con calma.
 
-## Portal de ejemplo
+## Ver el portal
 
-El proyecto genera un portal HTML en:
+Cuando GitHub Pages este activado, el portal se podra ver aqui:
 
-[Abrir portal de ejemplo](portal/index.html)
+[Ver portal inmobiliario](https://alexgonzalezromo.github.io/IA_Agente_Inmobiliario/portal/)
 
-Si lo estas viendo desde GitHub, puede que el enlace abra el HTML como codigo.
-Para verlo como pagina, descarga el repo y abre `portal/index.html` en el
-navegador. Mas adelante se puede publicar igual con GitHub Pages o en un VPS.
+El portal incluye anuncios con foto, filtros, ordenacion, fichas individuales,
+galeria de imagenes y enlace directo a la web original de cada vivienda.
 
-## Que hace ahora mismo
+## Que hace
 
-- Busca viviendas en Campoamor/Orihuela Costa en varias fuentes.
-- Guarda los anuncios en `data/properties.db`.
-- Detecta anuncios nuevos y cambios de precio.
-- Calcula precio por metro cuadrado y otros datos utiles.
-- Entrena un modelo con scikit-learn para estimar el precio anunciado.
-- Compara precio real vs estimado y marca si esta por encima, cerca o por debajo.
-- Genera un portal estatico con fotos, filtros, ordenacion y fichas individuales.
-- En cada ficha se pueden pasar las fotos y abrir el anuncio original.
+- Reune anuncios de varias webs inmobiliarias.
+- Se centra en viviendas de Campoamor y alrededores.
+- Guarda precio, metros, habitaciones, banos, ubicacion, fotos y enlace original.
+- Calcula datos utiles como precio por metro cuadrado.
+- Usa machine learning para estimar el valor aproximado de cada vivienda.
+- Compara el precio anunciado con esa estimacion.
+- Genera una web estatica para ver las mejores oportunidades de forma clara.
 
-## Fuentes incluidas
+## Por que me gusta este proyecto
 
-Ahora mismo hay scrapers para:
+Porque mezcla varias cosas que me interesan mucho: automatizacion, datos,
+machine learning y una interfaz que realmente sirve para tomar decisiones.
 
-- Fotocasa
-- Idealista
-- Milanuncios
-- Moreno Schmidt
-- United Real Estate
+No queria hacer solo un script que escupe resultados por consola. Queria llegar
+a algo que se pudiera abrir, mirar y entender rapido, casi como si fuera mi
+propio mini portal inmobiliario.
 
-Algunas webs cambian mucho, bloquean peticiones o cargan contenido de forma
-dinamica. Por eso los scrapers intentan ser prudentes y, cuando tiene sentido,
-usar cache local durante pruebas.
+## Fuentes que estoy trabajando
 
-## Modelo de machine learning
+Ahora mismo el proyecto trabaja con varias fuentes, entre ellas Fotocasa,
+Idealista, Milanuncios, Moreno Schmidt y United Real Estate.
 
-El modelo esta en `ML/predict_houses_value.py`.
+Cada web es un mundo y algunas cambian bastante o ponen limites, asi que parte
+del proyecto tambien consiste en ir haciendo los scrapers mas resistentes y
+anadir nuevas fuentes poco a poco.
 
-Usa un `Pipeline` de scikit-learn con:
+## Machine learning
 
-- imputacion de valores numericos
-- one-hot encoding para variables categoricas
-- `RandomForestRegressor`
+La parte de ML intenta estimar el precio de una vivienda usando datos como
+metros, habitaciones, banos, zona, tipo de vivienda, distancia a la playa y
+extras que aparecen en el texto del anuncio.
 
-Las variables principales son metros, habitaciones, banos, distancia a la playa,
-fuente, zona, tipo de vivienda y algunas pistas sacadas del texto, como piscina,
-terraza, garaje o vistas al mar.
+No es una tasacion profesional, pero si sirve como una referencia rapida para
+detectar anuncios que parecen caros, ajustados o potencialmente interesantes.
 
-## Instalacion
+## Siguientes pasos
 
-```powershell
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
+Quiero seguir mejorandolo con mas fuentes, mejores fotos, scoring mas fino y una
+version desplegada para que el portal se pueda consultar siempre online.
 
-## Uso
-
-Ejecutar todo el flujo:
-
-```powershell
-python main.py
-```
-
-Probar con pocas paginas:
-
-```powershell
-python main.py --max-pages 1
-```
-
-Solo actualizar el modelo sin volver a scrapear:
-
-```powershell
-python main.py --ml-only
-```
-
-Generar el portal:
-
-```powershell
-python app\portal_generator.py
-```
-
-El resultado queda en `portal/index.html`.
-
-## Estructura
-
-```text
-app/        base de datos y generador del portal
-ML/         modelo de estimacion de precios con scikit-learn
-scrapers/   scrapers de las distintas fuentes
-portal/     ejemplo generado del portal HTML
-data/       base de datos local, ignorada en Git
-```
-
-## Cosas que quiero mejorar
-
-- Anadir mas fuentes inmobiliarias que tengan viviendas en Campoamor.
-- Afinar el scoring para que no sea solo precio, tambien calidad del anuncio.
-- Publicar el portal para poder verlo sin abrir archivos locales.
-- Separar mejor backend y frontend si el proyecto crece.
-- Preparar una ejecucion periodica en un VPS.
-
-## Nota
-
-Este proyecto es para aprendizaje y uso personal. Las webs pueden cambiar sus
-condiciones o su estructura, asi que los scrapers pueden necesitar ajustes con el
-tiempo.
+La idea final es que el agente pueda ejecutarse en un servidor, actualizar los
+anuncios automaticamente y dejar el portal listo sin tener que hacerlo a mano.
