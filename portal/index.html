@@ -3328,7 +3328,7 @@ For sale: a cozy apartment located on the top floor of a building in Orihuela Co
   </main>
   <div class="toast" id="toast">Enlace copiado</div>
   <script>
-    const cards = Array.from(document.querySelectorAll(".listing"));
+    const allCards = Array.from(document.querySelectorAll(".listing"));
     const search = document.getElementById("search");
     const sort = document.getElementById("sort");
     const filters = Array.from(document.querySelectorAll(".filter"));
@@ -3337,6 +3337,39 @@ For sale: a cozy apartment located on the top floor of a building in Orihuela Co
     const noResults = document.getElementById("no-results");
     const toast = document.getElementById("toast");
     let activeSource = "all";
+
+    function metricNumber(card, index) {
+      const item = card.querySelectorAll(".metrics span")[index];
+      return item ? Number((item.textContent || "").replace(/\D/g, "") || 0) : 0;
+    }
+
+    function duplicateKey(card) {
+      return [
+        asNumber(card, "price"),
+        metricNumber(card, 0),
+        metricNumber(card, 1),
+        metricNumber(card, 2),
+      ].join("|");
+    }
+
+    function cardQuality(card) {
+      return asNumber(card, "score") + (card.querySelector("img") ? 10 : 0);
+    }
+
+    const bestByProperty = new Map();
+    allCards.forEach(card => {
+      const key = duplicateKey(card);
+      const current = bestByProperty.get(key);
+      if (!current || cardQuality(card) > cardQuality(current)) {
+        if (current) current.remove();
+        bestByProperty.set(key, card);
+      } else {
+        card.remove();
+      }
+    });
+    const cards = Array.from(bestByProperty.values());
+    document.querySelector(".count").textContent = `${cards.length} anuncios seleccionados`;
+    document.querySelector(".stat strong").textContent = cards.length;
 
     function asNumber(card, key) {
       return Number(card.dataset[key] || 0);
@@ -3388,6 +3421,8 @@ For sale: a cozy apartment located on the top floor of a building in Orihuela Co
         }
       });
     });
+
+    applyState();
   </script>
 </body>
 </html>

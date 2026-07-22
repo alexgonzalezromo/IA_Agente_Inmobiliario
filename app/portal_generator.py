@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
 import sqlite3
 import sys
 from pathlib import Path
@@ -135,6 +136,44 @@ def price_position_label(row: sqlite3.Row) -> str:
     return labels.get(str(row_get(row, "price_vs_estimate", "") or ""), "analizado")
 
 
+def normalized_piece(value: object) -> str:
+    cleaned = re.sub(r"[^a-z0-9]+", " ", str(value or "").lower())
+    return " ".join(cleaned.split())
+
+
+def duplicate_key(row: sqlite3.Row) -> tuple[object, ...]:
+    return (
+        row_get(row, "price", 0),
+        row_get(row, "area_m2", 0),
+        row_get(row, "bedrooms", 0),
+        row_get(row, "bathrooms", 0),
+        normalized_piece(row_get(row, "location", ""))[:45],
+    )
+
+
+def row_quality(row: sqlite3.Row) -> tuple[int, int, int, float]:
+    return (
+        property_score(row),
+        len(image_list(row)),
+        len(str(row_get(row, "description", "") or "")),
+        -abs(float(row_get(row, "price_difference", 0) or 0)),
+    )
+
+
+def remove_duplicate_properties(rows: list[sqlite3.Row]) -> list[sqlite3.Row]:
+    selected: dict[tuple[object, ...], sqlite3.Row] = {}
+    order: list[tuple[object, ...]] = []
+    for row in rows:
+        key = duplicate_key(row)
+        if key not in selected:
+            selected[key] = row
+            order.append(key)
+            continue
+        if row_quality(row) > row_quality(selected[key]):
+            selected[key] = row
+    return [selected[key] for key in order]
+
+
 def detail_path(row: sqlite3.Row) -> str:
     return f"properties/{int(row['id'])}.html"
 
@@ -142,7 +181,7 @@ def detail_path(row: sqlite3.Row) -> str:
 def fetch_portal_properties(db_path: Path) -> list[sqlite3.Row]:
     with sqlite3.connect(db_path) as connection:
         connection.row_factory = sqlite3.Row
-        return connection.execute(
+        rows = connection.execute(
             """
             SELECT *
             FROM properties
@@ -157,6 +196,7 @@ def fetch_portal_properties(db_path: Path) -> list[sqlite3.Row]:
             ORDER BY score DESC, price_difference ASC, price ASC
             """
         ).fetchall()
+    return remove_duplicate_properties(rows)
 
 
 def render_card(row: sqlite3.Row) -> str:
@@ -792,7 +832,7 @@ def render_page(rows: list[sqlite3.Row]) -> str:
   </main>
   <div class="toast" id="toast">Enlace copiado</div>
   <script>
-    const cards = Array.from(document.querySelectorAll(".listing"));
+    const allCards = Array.from(document.querySelectorAll(".listing"));
     const search = document.getElementById("search");
     const sort = document.getElementById("sort");
     const filters = Array.from(document.querySelectorAll(".filter"));
@@ -801,6 +841,39 @@ def render_page(rows: list[sqlite3.Row]) -> str:
     const noResults = document.getElementById("no-results");
     const toast = document.getElementById("toast");
     let activeSource = "all";
+
+    function metricNumber(card, index) {{
+      const item = card.querySelectorAll(".metrics span")[index];
+      return item ? Number((item.textContent || "").replace(/\\D/g, "") || 0) : 0;
+    }}
+
+    function duplicateKey(card) {{
+      return [
+        asNumber(card, "price"),
+        metricNumber(card, 0),
+        metricNumber(card, 1),
+        metricNumber(card, 2),
+      ].join("|");
+    }}
+
+    function cardQuality(card) {{
+      return asNumber(card, "score") + (card.querySelector("img") ? 10 : 0);
+    }}
+
+    const bestByProperty = new Map();
+    allCards.forEach(card => {{
+      const key = duplicateKey(card);
+      const current = bestByProperty.get(key);
+      if (!current || cardQuality(card) > cardQuality(current)) {{
+        if (current) current.remove();
+        bestByProperty.set(key, card);
+      }} else {{
+        card.remove();
+      }}
+    }});
+    const cards = Array.from(bestByProperty.values());
+    document.querySelector(".count").textContent = `${{cards.length}} anuncios seleccionados`;
+    document.querySelector(".stat strong").textContent = cards.length;
 
     function asNumber(card, key) {{
       return Number(card.dataset[key] || 0);
@@ -852,6 +925,8 @@ def render_page(rows: list[sqlite3.Row]) -> str:
         }}
       }});
     }});
+
+    applyState();
   </script>
 </body>
 </html>
