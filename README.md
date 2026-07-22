@@ -25,6 +25,16 @@ individuales, galería de imágenes y enlace directo al anuncio original.
 - Compara el precio publicado con esa estimación.
 - Genera una web estática para revisar los anuncios de forma visual.
 
+## Cómo funciona
+
+El flujo técnico es:
+
+1. Los scrapers recorren las fuentes inmobiliarias y extraen los datos de cada anuncio.
+2. La información se normaliza y se guarda en una base de datos SQLite.
+3. El modelo de machine learning, hecho con scikit-learn, estima el precio esperado.
+4. El sistema compara precio real y precio estimado para ordenar mejor las viviendas.
+5. El generador crea un portal HTML estático con filtros, fotos y fichas individuales.
+
 ## Por qué lo hice
 
 Buscar vivienda puede volverse bastante caótico: muchas pestañas abiertas,
